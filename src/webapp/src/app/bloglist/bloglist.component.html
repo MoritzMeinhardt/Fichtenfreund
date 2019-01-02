@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <app-blog *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog._id"></app-blog>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <div class="paging">
+        <hr>
+        <p>
+          <a href=""><</a>
+          <a href="">1</a>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">...</a>
+          <a href="">></a>
+        </p>
+        <hr>
+      </div>
+    </div>
+    <ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
+
+    <hr>
+
+    <pre>Current page: {{page}}</pre>
+  </div>
+</div>

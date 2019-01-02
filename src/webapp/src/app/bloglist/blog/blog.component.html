@@ -1,0 +1,13 @@
+<div id="blog">
+  <button class="btn btn-danger" (click)="onDelete()">D</button>
+  <h1><a href="">KATEGORIE</a></h1>
+  <a [routerLink]="myBlog._id">
+    <div class="imageContainer">
+      <img [src]="myBlog.titlePicture" alt="">
+    </div>
+    <div>
+      <h3>{{myBlog.title | uppercase}}<span class="spanright">05.12.2018</span></h3>
+      <p>   {{ (myBlog.paragraphs[0]?.paragraphText.length >240)? (myBlog.paragraphs[0]?.paragraphText | slice:0:240)+' ...':(myBlog.paragraphs[0]?.paragraphText) }}</p>
+    </div>
+  </a>
+</div>

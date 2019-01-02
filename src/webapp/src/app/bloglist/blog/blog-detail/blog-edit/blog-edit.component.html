@@ -1,0 +1,76 @@
+<form class="form-group" [formGroup]="editBlogForm" (ngSubmit)="onSubmit()">
+
+  <!--title-->
+  <div class="form-group-row form-inline">
+    <label class="col-2 col-form-label" for="title">Titel:</label>
+    <div class="col-10 w-100">
+      <input formControlName="title" name="title" id="title" class="form-control" type="text" placeholder="Mein schöner Titel">
+    </div>
+  </div>
+
+  <!--pic-->
+  <div class="form-group-row form-inline">
+    <label class="col-2 col-form-label" for="inputFile">Hauptbild hochladen:</label>
+    <!--<input formControlName="titlePicture" type="file" class="form-control-file" id="inputFile" aria-describedby="fileHelp">-->
+    <div class="col-10 w-100">
+      <input formControlName="titlePicture" type="text" class="form-control" id="inputFile" aria-describedby="fileHelp">
+      <small id="fileHelp" class="form-text text-muted">Put main picture here.</small>
+    </div>
+  </div>
+
+  <!--1. paragraph-->
+  <div class="paragraphs" formArrayName="paragraphs">
+    <hr>
+    <div class="form-group"
+         *ngFor="let c of editBlogForm.get('paragraphs').controls; let index = index">
+      <div [formGroupName]="index">
+
+        <!--title-->
+
+        <div class="form-group-row form-inline">
+          <label class="col-2 col-form-label" for="paragraphTitle">Untertitel:</label>
+          <div class="col-10 w-100 d-flex">
+            <input formControlName="paragraphTitle" name="paragraphTitle" id="paragraphTitle" class="form-control" type="text" placeholder="Mein schöner Untertitel">
+            <button type="button" class="btn btn-danger" (click)="onDeleteParagraph(index)">X</button>
+          </div>
+        </div>
+
+        <!--pic-->
+        <div class="form-group-row form-inline">
+          <label class="col-2 col-form-label" for="pInputFile">Paragraphbild hochladen:</label>
+         <!-- <input formControlName="paragraphPic" type="file" class="form-control-file" id="pInputFile" aria-describedby="fileHelp2">-->
+          <div class="col-10 w-100">
+            <input formControlName="paragraphPic" type="text" class="form-control" id="pInputFile" aria-describedby="fileHelp2">
+            <small id="fileHelp2" class="form-text text-muted">Put paragraph picture here.</small>
+          </div>
+        </div>
+
+        <!--text-->
+        <div class="form-group-row form-inline">
+          <label class="col-2 col-form-label" for="paragraphText">Paragraphtext:</label>
+          <div class="col-10 w-100">
+            <textarea formControlName="paragraphText" name="paragraphText" id="paragraphText" class="form-control w-100" rows="12"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="onAddParagraph()">Paragraph hinzufügen</button>
+  </div>
+
+
+  <div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn" (click)="onPreview()">Vorschau</button>
+  <button type="submit" class="btn btn-primary">{{submitText}}</button>
+    <button type="button" class="btn btn-danger" (click)="onDelete()">Löschen</button>
+  </div>
+    <!--Datum?-->
+
+</form>
+<div class="preview" *ngIf="showPreview">
+  <app-blog-detail [myBlog]="myBlog"></app-blog-detail>
+</div>

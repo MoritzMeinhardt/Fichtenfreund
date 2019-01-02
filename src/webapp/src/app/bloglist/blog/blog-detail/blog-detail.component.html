@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <div>
+        <!--    <div class="col-2 margin-top-20">
+              <h1><a href="">{{myBlog.category}}</a></h1>
+            </div>-->
+        <div class="noShadowX">
+          <div>
+            <h1>{{myBlog?.date | date:'d. MMMM y':'de-DE'}}</h1>
+            <h3 class="letter-spacing">{{myBlog?.title | uppercase}}</h3>
+            <div *ngFor="let p of myBlog?.paragraphs; let i = index">
+              <div class="imageContainer" *ngIf="p.paragraphPic">
+                <img [src]="p?.paragraphPic" alt="">
+              </div>
+              <h2 class="letter-spacing">{{p?.paragraphTitle}}</h2>
+              <p>{{p?.paragraphText}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="btn" routerLink="edit">Edit</button>
+    </div>
+  </div>
+  <app-comments *ngIf="myBlog" [myBlog]="myBlog"></app-comments>
+</div>
