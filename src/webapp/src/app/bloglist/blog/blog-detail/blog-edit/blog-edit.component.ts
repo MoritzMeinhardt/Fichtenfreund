@@ -25,6 +25,7 @@ export class BlogEditComponent implements OnInit {
 /*      'test': new FormGroup({}),*/
         'title': new FormControl(null),
         'titlePicture': new FormControl(null),
+        'date': new FormControl(null),
         'paragraphs': new FormArray([])
     });
 

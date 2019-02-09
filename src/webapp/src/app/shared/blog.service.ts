@@ -3,6 +3,7 @@ import {Subject} from "rxjs";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {CommentModel} from "../bloglist/blog/blog-detail/comments/comment.model";
+import {AuthService} from "./auth.service";
 
 @Injectable()
 export class BlogService {
@@ -25,7 +26,8 @@ export class BlogService {
       new Date(Date.now()),'Reisen',[{paragraphPic: 'https://images.unsplash.com/photo-1521336575822-6da63fb45455?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', paragraphTitle: 'Untertitel', paragraphText: 'Wir waren da und es war gut. lorem ' }], this.dummyComment)
   ];*/
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private authService: AuthService) {}
 
   getBlogs(){
     return this.http.get('http://localhost:3000/api/blogs');
@@ -37,6 +39,9 @@ export class BlogService {
   }
 
   add(newBlog: Blog) {
+    let headers = new Headers();
+    const token = this.authService.getToken();
+    headers.append('Authorization', token);
     return this.http.post('http://localhost:3000/api/blogs/', newBlog);
   }
 

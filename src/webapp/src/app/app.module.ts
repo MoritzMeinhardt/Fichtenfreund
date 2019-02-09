@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { CommentsComponent } from './bloglist/blog/blog-detail/comments/comments.component';
 import { CommentFormComponent } from './bloglist/blog/blog-detail/comments/comment-form/comment-form.component';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from "./shared/auth.service";
+import {NgxImageGalleryModule} from "ngx-image-gallery";
+
+export function tokenGetter() {
+  console.log("my token " + localStorage.getItem('id_token'));
+  return localStorage.getItem('id_token');
+}
 
 @NgModule({
   declarations: [
@@ -32,16 +41,27 @@ import { CommentFormComponent } from './bloglist/blog/blog-detail/comments/comme
     FooterComponent,
     BlogEditComponent,
     CommentsComponent,
-    CommentFormComponent
+    CommentFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:4200', 'localhost:3000'],
+        blacklistedRoutes: ['example.com/examplebadroute/']
+      }
+    }),
+    NgxImageGalleryModule
   ],
-  providers: [BlogService],
+  providers: [
+    BlogService,
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

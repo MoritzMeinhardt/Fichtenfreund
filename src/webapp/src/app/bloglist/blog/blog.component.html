@@ -1,12 +1,22 @@
 <div id="blog">
-  <button class="btn btn-danger" (click)="onDelete()">D</button>
+  <button class="btn btn-danger" *ngIf="false" (click)="onDelete()">D</button>
   <h1><a href="">KATEGORIE</a></h1>
-  <a [routerLink]="myBlog._id">
     <div class="imageContainer">
-      <img [src]="myBlog.titlePicture" alt="">
+      <ngx-image-gallery
+        [images]="images"
+        [conf]="conf"
+        (onOpen)="galleryOpened($event)"
+        (onClose)="galleryClosed()"
+        (onImageClicked)="galleryImageClicked($event)"
+        (onImageChange)="galleryImageChanged($event)"
+        (onDelete)="deleteImage($event)"
+        (click)="clickInside($event)"
+      ></ngx-image-gallery>
+      <img [src]="myBlog.titlePicture" alt="" (click)="openGallery(0)">
     </div>
+  <a [routerLink]="myBlog._id">
     <div>
-      <h3>{{myBlog.title | uppercase}}<span class="spanright">05.12.2018</span></h3>
+      <h3>{{myBlog.title | uppercase}}<span class="spanright">{{myBlog.date | date}}</span></h3>
       <p>   {{ (myBlog.paragraphs[0]?.paragraphText.length >240)? (myBlog.paragraphs[0]?.paragraphText | slice:0:240)+' ...':(myBlog.paragraphs[0]?.paragraphText) }}</p>
     </div>
   </a>

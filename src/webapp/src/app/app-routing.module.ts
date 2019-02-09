@@ -3,9 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {BloglistComponent} from "./bloglist/bloglist.component";
 import {BlogDetailComponent} from "./bloglist/blog/blog-detail/blog-detail.component";
 import {BlogEditComponent} from "./bloglist/blog/blog-detail/blog-edit/blog-edit.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/blog', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
   {path: 'blog', component: BloglistComponent},
   {path: 'blog/new', component:BlogEditComponent},
   {path: 'blog/:id', component:BlogDetailComponent},
