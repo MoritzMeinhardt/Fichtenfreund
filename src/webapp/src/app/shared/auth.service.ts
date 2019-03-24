@@ -7,7 +7,7 @@ export class AuthService {
   authToken: any;
   user: any;
   private urlBase = 'http://52.28.221.214:3000';
-  //urlBase = 'http://localhost:3000';
+  //private urlBase = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
     this.loadToken();

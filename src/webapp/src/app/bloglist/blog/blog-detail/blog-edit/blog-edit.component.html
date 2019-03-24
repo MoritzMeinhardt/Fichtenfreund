@@ -30,7 +30,7 @@
   <div class="paragraphs" formArrayName="paragraphs">
     <hr>
     <div class="form-group"
-         *ngFor="let c of editBlogForm.get('paragraphs'); let index = index">
+         *ngFor="let c of paragraphs.controls; let index = index">
          <!--*ngFor="let c of editBlogForm.get('paragraphs').controls; let index = index">-->
       <div [formGroupName]="index">
 

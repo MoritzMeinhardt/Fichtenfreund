@@ -16,7 +16,7 @@ export class BlogService {
   */
   onChangedDetail = new Subject();
   private urlBase = 'http://52.28.221.214:3000';
-  //urlBase = 'http://localhost:3000';
+  //private urlBase = 'http://localhost:3000';
 
 
 /*  private bloglist: Blog[] = [new Blog( 'Schweden - Malmö', 'https://images.unsplash.com/photo-1506701160839-34cfdecaf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
@@ -44,6 +44,7 @@ export class BlogService {
     let headers = new Headers();
     const token = this.authService.getToken();
     headers.append('Authorization', token);
+    headers.append('MyHeader', "MY VALUE"); //TODO DELETE
     return this.http.post(this.urlBase + '/api/blogs/', newBlog);
   }
 

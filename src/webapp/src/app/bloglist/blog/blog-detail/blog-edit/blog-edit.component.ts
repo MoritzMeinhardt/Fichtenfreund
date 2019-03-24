@@ -117,4 +117,6 @@ export class BlogEditComponent implements OnInit {
       (err) => console.log('Delete: ' + err)
     );
   }
+
+  get paragraphs() { return <FormArray>this.editBlogForm.get('paragraphs'); }
 }
