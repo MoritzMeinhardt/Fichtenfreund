@@ -6,6 +6,7 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./api/config/database');
+const User = require('./api/models/user')
 
 // Connect to Database
 mongoose.connect(config.database);
@@ -17,6 +18,23 @@ mongoose.connection.on('connected', () => {
 
 mongoose.connection.on('error', (err) => {
     console.log('Database error ' + err);
+});
+
+let newUser = new User({
+    name: "TESTUSER",
+    email: "TESTMAIL",
+    username: "TESTUSER",
+    password: "TESTPW"
+});
+
+console.log(newUser.name);
+
+User.addUser(newUser, (err, user) => {
+    if(err){
+        console.log('Failed to register user. Error: ' + err);
+    } else {
+       console.log('User registered');
+    }
 });
 
 const app = express();
