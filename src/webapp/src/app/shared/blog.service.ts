@@ -15,6 +15,8 @@ export class BlogService {
   /*private homeBigPic = 'https://images.unsplash.com/photo-1535725967168-fbfdcdab1f21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80';
   */
   onChangedDetail = new Subject();
+  private urlBase = 'http://52.28.221.214:3000';
+  //urlBase = 'http://localhost:3000';
 
 
 /*  private bloglist: Blog[] = [new Blog( 'Schweden - Malmö', 'https://images.unsplash.com/photo-1506701160839-34cfdecaf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
@@ -30,27 +32,27 @@ export class BlogService {
               private authService: AuthService) {}
 
   getBlogs(){
-    return this.http.get('http://localhost:3000/api/blogs');
+    return this.http.get(this.urlBase + '/api/blogs');
   }
 
   getBlog(id: string){
     console.log('Get Blog id: ' + id);
-    return this.http.get('http://localhost:3000/api/blogs/' + id);
+    return this.http.get(this.urlBase + '/api/blogs/' + id);
   }
 
   add(newBlog: Blog) {
     let headers = new Headers();
     const token = this.authService.getToken();
     headers.append('Authorization', token);
-    return this.http.post('http://localhost:3000/api/blogs/', newBlog);
+    return this.http.post(this.urlBase + '/api/blogs/', newBlog);
   }
 
   update(id: string, blog: Blog) {
-    return this.http.patch('http://localhost:3000/api/blogs/' + id, blog);
+    return this.http.patch(this.urlBase + '/api/blogs/' + id, blog);
   }
 
   delete(id: string) {
-    return this.http.delete('http://localhost:3000/api/blogs/' + id);
+    return this.http.delete(this.urlBase + '/api/blogs/' + id);
   }
 
   addComment(id: string, comment: CommentModel) {

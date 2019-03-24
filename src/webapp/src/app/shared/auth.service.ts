@@ -6,6 +6,8 @@ export class AuthService {
 
   authToken: any;
   user: any;
+  private urlBase = 'http://52.28.221.214:3000';
+  //urlBase = 'http://localhost:3000';
 
   constructor(private http: HttpClient) {
     this.loadToken();
@@ -18,7 +20,7 @@ export class AuthService {
       "username": username,
       "password": password
     };
-    return this.http.post('http://localhost:3000/api/users/authenticate', user);
+    return this.http.post(this.urlBase + '/api/users/authenticate', user);
   }
 
   storeUserData(token, user) {
