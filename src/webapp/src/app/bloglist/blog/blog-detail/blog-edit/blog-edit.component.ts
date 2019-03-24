@@ -14,8 +14,8 @@ export class BlogEditComponent implements OnInit {
   editBlogForm: FormGroup;
   private id: string;
   private myBlog: Blog;
-  private submitText = 'Speichern';
-  private showPreview = false;
+  submitText = 'Speichern';
+  showPreview = false;
 
   constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 

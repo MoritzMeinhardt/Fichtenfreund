@@ -8,8 +8,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @ViewChild('navbar') navbar;
-  private sticky = false;
-  private show = true;
+  sticky = false;
+  show = true;
   private lastScrollPosition = 0;
   private positionTop: number;
 

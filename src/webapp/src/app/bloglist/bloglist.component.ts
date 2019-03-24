@@ -15,7 +15,7 @@ export class BloglistComponent implements OnInit {
   private dummypic2 = 'https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1402&q=80';
 
 
-  private page = 10;
+  page = 10;
   bloglist: Blog[];
 
 

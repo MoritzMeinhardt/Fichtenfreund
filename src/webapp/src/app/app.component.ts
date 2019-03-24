@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit{
   title = 'webapp';
 
-  private showAboutUs = true;
+  showAboutUs = true;
 
   onResize() {
     console.log(window.innerWidth + ' ' + window.outerWidth + ' ' );

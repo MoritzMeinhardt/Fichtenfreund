@@ -10,7 +10,7 @@ import {Blog} from "../../../blog.model";
 })
 export class CommentFormComponent implements OnInit {
 
-  private show = false;
+  show = false;
   @Input() myBlog: Blog;
   commentForm: FormGroup;
 
