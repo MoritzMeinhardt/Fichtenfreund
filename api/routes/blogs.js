@@ -9,7 +9,9 @@ router.get('/',  (req, res) => {
     Blog.find({}, (err, blogs) => {
         res.json(blogs);
     })
-}).post('/', (req, res) => {
+}).post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
+    console.log("req.isAuthenticated()");
+    console.log(req.isAuthenticated());
     let blog = new Blog(req.body);
     blog.save();
     res.status(201).send(blog);

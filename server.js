@@ -85,7 +85,7 @@ app.use('/api/blogs', blogs);
 
 // Index Route
 app.get('*', function(req, res){
-    res.sendfile(__dirname + '/dist/index.html');
+    res.sendFile(__dirname + '/dist/index.html');
 });
 
 // Start Server
