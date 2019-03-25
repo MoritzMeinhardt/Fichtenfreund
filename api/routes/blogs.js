@@ -9,12 +9,14 @@ router.get('/',  (req, res) => {
     Blog.find({}, (err, blogs) => {
         res.json(blogs);
     })
-}).post('/', passport.authenticate('jwt', {session:false}), (req, res) => {
-    console.log("req.isAuthenticated()");
-    console.log(req.isAuthenticated());
-    let blog = new Blog(req.body);
-    blog.save();
-    res.status(201).send(blog);
+}).post('/', (req, res) => {
+    if(req.isAuthenticated()) {
+        let blog = new Blog(req.body);
+        blog.save();
+        res.status(201).send(blog);
+    } else {
+        res.send(401);
+    }
 });
 
 router.get('/:id', (req, res) => {
