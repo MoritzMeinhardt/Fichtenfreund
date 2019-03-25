@@ -43,7 +43,7 @@ const users = require('./api/routes/users');
 const blogs = require('./api/routes/blogs');
 
 // Port Number
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 80;
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -64,8 +64,8 @@ app.use('/api/users', users);
 app.use('/api/blogs', blogs);
 
 // Index Route
-app.get('/', (req, res) => {
-    res.send('Invalid Endpoint');
+app.get('*', function(req, res){
+    res.sendfile(__dirname + '/dist/index.html');
 });
 
 // Start Server
