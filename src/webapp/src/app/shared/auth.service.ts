@@ -35,7 +35,7 @@ export class AuthService {
   }
 
   public getToken(): string {
-    return localStorage.getItem('token');
+    return localStorage.getItem('id_token');
   }
 
 /*  public isAuthenticated(): boolean {

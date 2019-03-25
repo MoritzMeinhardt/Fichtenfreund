@@ -11,6 +11,8 @@ router.get('/blogs',  (req, res) => {
         res.json(blogs);
     })
 }).post('/blogs', passport.authenticate('jwt', {session: false}), (req, res) => {
+    console.log("req.isAuthenticated()");
+    console.log(req.isAuthenticated());
     let blog = new Blog(req.body);
     blog.save();
     res.status(201).send(blog);

@@ -69,7 +69,7 @@ const port = process.env.PORT || 80;
 app.use(bodyParser.json());
 
 // CORS Middleware
-app.use(cors());
+//app.use(cors());
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'dist')));

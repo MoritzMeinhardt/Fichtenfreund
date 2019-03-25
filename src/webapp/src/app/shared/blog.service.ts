@@ -1,7 +1,7 @@
 import {Blog} from "../bloglist/blog/blog.model";
 import {Subject} from "rxjs";
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CommentModel} from "../bloglist/blog/blog-detail/comments/comment.model";
 import {AuthService} from "./auth.service";
 import {environment} from "../../environments/environment";
@@ -40,11 +40,24 @@ export class BlogService {
   }
 
   add(newBlog: Blog) {
-    let headers = new Headers();
+
+    /*let headers = new Headers();*/
     const token = this.authService.getToken();
-    headers.append('Authorization', token);
-    headers.append('MyHeader', "MY VALUE"); //TODO DELETE
-    return this.http.post(this.urlBase + '/api/blogs/', newBlog);
+    console.log("token: ", this.authService.getToken());
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+        'TEST': 'TEST'
+      })
+    };
+    console.log(httpOptions);
+    /*headers.append('Authorization', token);
+    headers.append('Content-Type', 'application/json');
+    headers.append('MyHeader', "MY VALUE"); //TODO DELETE*/
+    return this.http.post(this.urlBase + '/api/users/blogs/', newBlog, httpOptions);
+    //return this.http.get(this.urlBase + '/api/blogs', httpOptions);
   }
 
   update(id: string, blog: Blog) {
