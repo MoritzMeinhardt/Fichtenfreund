@@ -1,12 +1,13 @@
+
 const express = require('express');
-const http = require('http'); // TEST
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./api/config/database');
-const User = require('./api/models/user')
+const User = require('./api/models/user');
+const Blog = require('./api/models/blog');
 
 // Connect to Database
 mongoose.connect(config.database);
@@ -20,6 +21,7 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error ' + err);
 });
 
+// --------------------------------------------------------------------------------------------------------------
 let newUser = new User({
     name: "TESTUSER",
     email: "TESTMAIL",
@@ -27,15 +29,33 @@ let newUser = new User({
     password: "TESTPW"
 });
 
+let newBlog = new Blog({
+    title: "MEIN TEST TITEL",
+    titlePicture: 'https://images.unsplash.com/photo-1496857239036-1fb137683000?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
+    paragraphs: [],
+    comments: []
+});
+
 console.log(newUser.name);
+console.log(newBlog.title);
 
 User.addUser(newUser, (err, user) => {
     if(err){
         console.log('Failed to register user. Error: ' + err);
     } else {
-       console.log('User registered');
+       console.log('User registered', user);
     }
 });
+
+Blog.addBlog(newBlog, (err, blog) => {
+    if(err){
+        console.log('Failed to register blog. Error: ' + err);
+    } else {
+        console.log('Blog registered', blog);
+    }
+});
+
+// ------------------------------------------------------------------------------------------------------------------------
 
 const app = express();
 

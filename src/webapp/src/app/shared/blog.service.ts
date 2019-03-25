@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {CommentModel} from "../bloglist/blog/blog-detail/comments/comment.model";
 import {AuthService} from "./auth.service";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class BlogService {
@@ -15,9 +16,7 @@ export class BlogService {
   /*private homeBigPic = 'https://images.unsplash.com/photo-1535725967168-fbfdcdab1f21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80';
   */
   onChangedDetail = new Subject();
-  private urlBase = 'http://52.28.221.214:3000';
-  //private urlBase = 'http://localhost:3000';
-
+  private urlBase = environment.urlBase;
 
 /*  private bloglist: Blog[] = [new Blog( 'Schweden - Malmö', 'https://images.unsplash.com/photo-1506701160839-34cfdecaf53c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
     new Date(Date.now()),'Reisen',[{paragraphPic: 'https://images.unsplash.com/photo-1521336575822-6da63fb45455?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60', paragraphTitle: 'Untertitel', paragraphText: this.dummytext2 }], this.dummyComment),

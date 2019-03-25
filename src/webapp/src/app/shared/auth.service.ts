@@ -1,13 +1,13 @@
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthService {
 
   authToken: any;
   user: any;
-  private urlBase = 'http://52.28.221.214:3000';
-  //private urlBase = 'http://localhost:3000';
+  private urlBase = environment.urlBase;
 
   constructor(private http: HttpClient) {
     this.loadToken();
