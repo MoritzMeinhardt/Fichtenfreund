@@ -9,14 +9,10 @@ router.get('/',  (req, res) => {
     Blog.find({}, (err, blogs) => {
         res.json(blogs);
     })
-}).post('/', (req, res) => {
-    if(req.isAuthenticated()) {
-        let blog = new Blog(req.body);
-        blog.save();
-        res.status(201).send(blog);
-    } else {
-        res.send(401);
-    }
+}).post('/', ensureLoggedIn, (req, res) => {
+    let blog = new Blog(req.body);
+    blog.save();
+    res.status(201).send(blog);
 });
 
 router.get('/:id', (req, res) => {
@@ -54,5 +50,23 @@ router.get('/:id', (req, res) => {
         });
     })
 });
+
+/*
+ * Check the request if the user is authenticated.
+ * Return an error message if not, otherwise keep going :)
+ */
+function ensureLoggedIn() {
+    return function(req, res, next) {
+        // isAuthenticated is set by `deserializeUser()`
+        if (!req.isAuthenticated || !req.isAuthenticated()) {
+            res.status(401).send({
+                success: false,
+                message: 'You need to be authenticated to access this page!'
+            })
+        } else {
+            next()
+        }
+    }
+}
 
 module.exports = router;
