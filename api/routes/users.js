@@ -4,6 +4,17 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const User = require('../models/user');
+const Blog = require('../models/blog');
+
+router.get('/blogs',  (req, res) => {
+    Blog.find({}, (err, blogs) => {
+        res.json(blogs);
+    })
+}).post('/blogs', passport.authenticate('jwt', {session: false}), (req, res) => {
+    let blog = new Blog(req.body);
+    blog.save();
+    res.status(201).send(blog);
+});
 
 //Register
 router.post('/register', (req, res, next) => {
