@@ -56,7 +56,7 @@ export class BlogService {
     /*headers.append('Authorization', token);
     headers.append('Content-Type', 'application/json');
     headers.append('MyHeader', "MY VALUE"); //TODO DELETE*/
-    return this.http.post(this.urlBase + '/api/users/blogs/', newBlog, httpOptions);
+    return this.http.post(this.urlBase + '/api/blogs/', newBlog, httpOptions);
     //return this.http.get(this.urlBase + '/api/blogs', httpOptions);
   }
 
