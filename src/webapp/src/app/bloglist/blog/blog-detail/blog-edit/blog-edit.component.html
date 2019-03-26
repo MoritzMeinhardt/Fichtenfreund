@@ -14,6 +14,7 @@
     <!--<input formControlName="titlePicture" type="file" class="form-control-file" id="inputFile" aria-describedby="fileHelp">-->
     <div class="col-10 w-100">
       <input formControlName="titlePicture" type="text" class="form-control" id="inputFile" aria-describedby="fileHelp">
+      <app-file-upload (mainPictureSelected)="onMainPictureSelected($event)"></app-file-upload>
       <small id="fileHelp" class="form-text text-muted">Put main picture here.</small>
     </div>
   </div>

@@ -6,8 +6,14 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./api/config/database');
-const User = require('./api/models/user');
-const Blog = require('./api/models/blog');
+
+//File Upload
+const multer = require('multer');
+const fs = require('fs');
+
+const upload = multer({
+    dest: 'uploads/' // this saves your file into a directory called "uploads"
+});
 
 // Connect to Database
 mongoose.connect(config.database);
@@ -21,42 +27,6 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error ' + err);
 });
 
-// --------------------------------------------------------------------------------------------------------------
-let newUser = new User({
-    name: "TESTUSER",
-    email: "TESTMAIL",
-    username: "TESTUSER",
-    password: "TESTPW"
-});
-
-let newBlog = new Blog({
-    title: "MEIN TEST TITEL",
-    titlePicture: 'https://images.unsplash.com/photo-1496857239036-1fb137683000?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-    paragraphs: [],
-    comments: []
-});
-
-console.log(newUser.name);
-console.log(newBlog.title);
-
-User.addUser(newUser, (err, user) => {
-    if(err){
-        console.log('Failed to register user. Error: ' + err);
-    } else {
-       console.log('User registered', user);
-    }
-});
-
-Blog.addBlog(newBlog, (err, blog) => {
-    if(err){
-        console.log('Failed to register blog. Error: ' + err);
-    } else {
-        console.log('Blog registered', blog);
-    }
-});
-
-// ------------------------------------------------------------------------------------------------------------------------
-
 const app = express();
 
 const users = require('./api/routes/users');
@@ -69,7 +39,15 @@ const port = process.env.PORT || 80;
 app.use(bodyParser.json());
 
 // CORS Middleware
-//app.use(cors());
+//app.use(cors()); // TODO FIXME dont use online but use offline
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
+
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -82,6 +60,26 @@ require('./api/config/passport')(passport);
 
 app.use('/api/users', users);
 app.use('/api/blogs', blogs);
+
+
+// It's very crucial that the file name matches the name attribute in your html
+app.post('/api/file-upload', upload.single('file-to-upload'), (req, res) => {
+
+    /** When using the "single"
+     data come in "req.file" regardless of the attribute "name". **/
+    var tmp_path = req.file.path;
+
+    /** The original name of the uploaded file
+     stored in the variable "originalname". **/
+    var target_path = 'uploads/' + req.file.originalname;
+
+    /** A better way to copy the uploaded file. **/
+    var src = fs.createReadStream(tmp_path);
+    var dest = fs.createWriteStream(target_path);
+    src.pipe(dest);
+    src.on('end', function() { res.json({sucess: 'true', path: target_path}); });
+    src.on('error', function(err) { res.json({sucess: 'false ', err: err, path: null}) });
+});
 
 // Index Route
 app.get('*', function(req, res){

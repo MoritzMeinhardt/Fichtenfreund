@@ -22,6 +22,7 @@ import { CommentFormComponent } from './bloglist/blog/blog-detail/comments/comme
 import { LoginComponent } from './login/login.component';
 import {AuthService} from "./shared/auth.service";
 import {NgxImageGalleryModule} from "ngx-image-gallery";
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 export function tokenGetter() {
   console.log("my token " + localStorage.getItem('id_token'));
@@ -42,7 +43,8 @@ export function tokenGetter() {
     BlogEditComponent,
     CommentsComponent,
     CommentFormComponent,
-    LoginComponent
+    LoginComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

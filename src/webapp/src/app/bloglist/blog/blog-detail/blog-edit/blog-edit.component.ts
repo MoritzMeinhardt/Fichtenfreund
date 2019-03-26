@@ -3,6 +3,8 @@ import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import {BlogService} from "../../../../shared/blog.service";
 import {Blog} from "../../blog.model";
 import {ActivatedRoute, Params} from "@angular/router";
+import { FileUploader } from 'ng2-file-upload';
+import {environment} from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-blog-edit',
@@ -16,6 +18,7 @@ export class BlogEditComponent implements OnInit {
   private myBlog: Blog;
   submitText = 'Speichern';
   showPreview = false;
+  public uploader:FileUploader = new FileUploader({url: environment.urlBase + ':80/api/file-upload', autoUpload: true});
 
   constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 
@@ -119,4 +122,10 @@ export class BlogEditComponent implements OnInit {
   }
 
   get paragraphs() { return <FormArray>this.editBlogForm.get('paragraphs'); }
+
+  onMainPictureSelected(path) {
+    this.editBlogForm.patchValue(
+      {'titlePicture': path}
+    );
+  }
 }
