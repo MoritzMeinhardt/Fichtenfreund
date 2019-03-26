@@ -12,7 +12,7 @@
         (onDelete)="deleteImage($event)"
         (click)="clickInside($event)"
       ></ngx-image-gallery>
-      <img src="{{ myBlog.titlePicture }}" alt="" (click)="openGallery(0)">
+      <img src="{{basePath + '/api/file-upload/' + myBlog.titlePicture }}" alt="" (click)="openGallery(0)">
       <p>{{ myBlog?.titlePicture }}</p>
     </div>
   <a [routerLink]="myBlog._id">

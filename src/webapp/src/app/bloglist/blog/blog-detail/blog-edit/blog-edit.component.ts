@@ -17,8 +17,8 @@ export class BlogEditComponent implements OnInit {
   private id: string;
   private myBlog: Blog;
   submitText = 'Speichern';
-  showPreview = false;
-  public uploader:FileUploader = new FileUploader({url: environment.urlBase + ':80/api/file-upload', autoUpload: true});
+  showPreview = false;/*
+  public uploader:FileUploader = new FileUploader({url: environment.urlBase + ':80/api/file-upload', autoUpload: true});*/
 
   constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 
@@ -95,6 +95,7 @@ export class BlogEditComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger;
     const blog = new Blog(this.editBlogForm.get('title').value, this.editBlogForm.get('titlePicture').value, new Date(Date.now()), 'PLATZHALTER', this.editBlogForm.get('paragraphs').value, []);
     if (this.id) {
       this.blogService.update(this.id, blog).subscribe(
@@ -127,5 +128,15 @@ export class BlogEditComponent implements OnInit {
     this.editBlogForm.patchValue(
       {'titlePicture': path}
     );
+  }
+
+  onPictureSelected(path, index, c:FormGroup) {
+    console.log(c);
+    c.patchValue({'paragraphPic': path})
+    console.log(c);
+    /*
+    this.editBlogForm.patchValue(
+      {'titlePicture': path}
+    );*/
   }
 }

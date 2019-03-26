@@ -11,7 +11,7 @@
             <h3 class="letter-spacing">{{myBlog?.title | uppercase}}</h3>
             <div *ngFor="let p of myBlog?.paragraphs; let i = index">
               <div class="imageContainer" *ngIf="p.paragraphPic">
-                <img src="{{ p?.paragraphPic }}" alt="">
+                <img *ngIf="p" src="{{ baseUrl + '/api/file-upload/' + p.paragraphPic }}" alt="">
               </div>
               <h2 class="letter-spacing">{{p?.paragraphTitle}}</h2>
               <p>{{p?.paragraphText}}</p>

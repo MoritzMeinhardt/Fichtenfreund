@@ -77,8 +77,18 @@ app.post('/api/file-upload', upload.single('file-to-upload'), (req, res) => {
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);
     src.pipe(dest);
-    src.on('end', function() { res.json({sucess: 'true', path: target_path}); });
+    console.log("path");
+    console.log(path);
+    console.log("path.basename");
+    console.log(path.basename);
+    console.log("req.originalUrl")
+    console.log(req.originalUrl)
+    src.on('end', function() { res.json({sucess: 'true', path: req.file.originalname}); });
     src.on('error', function(err) { res.json({sucess: 'false ', err: err, path: null}) });
+});
+
+app.get('/api/file-upload/:filename', (req, res) => {
+    res.sendFile(__dirname + '/uploads/' + req.params.filename);
 });
 
 // Index Route

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BlogService} from "../shared/blog.service";
 import {ActivatedRoute, Params} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   defaultImg = 'https://images.unsplash.com/photo-1535725967168-fbfdcdab1f21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80';
   img = this.defaultImg;
+
   constructor(private blogService: BlogService) {}
 
   ngOnInit() {
@@ -21,7 +23,7 @@ export class HomeComponent implements OnInit {
           this.img = this.defaultImg;
         }
         else {
-          this.img = img;
+          this.img = environment.urlBase + '/api/file-upload/' + img;
         }
       }
     );

@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Blog} from "../blog.model";
 import {ActivatedRoute, Params} from "@angular/router";
 import {BlogService} from "../../../shared/blog.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-blog-detail',
@@ -13,6 +14,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   @Input() myBlog: Blog;
   private id: string;
+  public baseUrl = environment.urlBase;
 
   constructor(private route: ActivatedRoute,
               private blogService: BlogService) { }

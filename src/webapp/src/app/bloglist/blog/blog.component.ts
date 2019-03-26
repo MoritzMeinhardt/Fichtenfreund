@@ -3,6 +3,7 @@ import {Blog} from "./blog.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BlogService} from "../../shared/blog.service";
 import {GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent} from "ngx-image-gallery";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-blog',
@@ -17,6 +18,7 @@ export class BlogComponent implements OnInit {
     // here you can hide your menu
     console.log("CLICKED OUTSIDE");
   }
+  public basePath = environment.urlBase;
 
 
   // gallery configuration
@@ -46,9 +48,9 @@ export class BlogComponent implements OnInit {
   constructor(private router: Router, private activeRoute: ActivatedRoute, private blogService: BlogService) { }
 
   ngOnInit() {
-    this.images.push({url: this.myBlog.titlePicture});
+    this.images.push({url: this.basePath + '/api/file-upload/' + this.myBlog.titlePicture});
     this.myBlog.paragraphs.forEach((p) => {
-      this.images.push({url: p.paragraphPic});
+      this.images.push({url: this.basePath + '/api/file-upload/' + p.paragraphPic});
     });
   }
 

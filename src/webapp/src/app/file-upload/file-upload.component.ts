@@ -12,7 +12,7 @@ const URL = environment.urlBase +'/api/file-upload'; //'https://evening-anchorag
 })
 export class FileUploadComponent {
   selectedFile: File = null;
-  @Output() mainPictureSelected = new EventEmitter<String>();
+  @Output() pictureSelected = new EventEmitter<String>();
 
   constructor(private http: HttpClient) {}
 
@@ -25,7 +25,7 @@ export class FileUploadComponent {
     fd.append('file-to-upload', this.selectedFile, this.selectedFile.name);
     this.http.post(URL, fd).subscribe((res:any) => {
       console.log(res);
-      this.mainPictureSelected.next(res.path);
+      this.pictureSelected.next(res.path);
     })
   }
 }
