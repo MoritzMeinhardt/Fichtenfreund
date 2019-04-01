@@ -1,11 +1,13 @@
 <app-header></app-header>
 <app-navbar></app-navbar>
-<div class="test container" style="max-width: 90%;">
-  <div class="row">
-    <div [ngClass]="{'col-10': showAboutUs}">
-      <router-outlet class="" (activate)="onActivate($event)" (window:resize)="onResize()" ></router-outlet>
-    </div>
-    <app-aboutus class="col-2" *ngIf="showAboutUs"></app-aboutus>
+
+<main class="row no-gutters ">
+  <div class="col mt-4 mx-auto p-0 col-md-10 col-xl-8">
+    <router-outlet (activate)="jumpToTop()"></router-outlet>
   </div>
-</div>
-<app-footer></app-footer>
+  <app-aboutus class="mr-3 mt-4 col-xl-3 d-none d-xl-block"></app-aboutus>
+</main>
+
+<footer class="p-3">
+    <app-footer></app-footer>
+</footer>
