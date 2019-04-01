@@ -1,6 +1,9 @@
+
+
 .navbar {
+  height: 0;
+  top: 0px; // because of heigth 0 it needs to be shifted up half his size
   position: sticky;
-  top: 0;
   z-index: 1;
   width: 100%;
   opacity: .8;
@@ -12,14 +15,29 @@
   margin-bottom: 20vh;
 }
 
+@media (min-width: 992px) {
+  .navbar {
+    top: 19px;
+  }
+}
+/*@include media-breakpoint-up(md) {
+  .navbar {
+    top: 22px;
+  }
+}*/
+
 .nav-link {
   line-height: 5vH;
 }
 
-li.nav-item {
-  width: 25%;
-  text-align: center;
+@media (min-width: 992px) {
+  li.nav-item {
+    padding-left: 0;
+    width: 25%;
+    text-align: center;
+  }
 }
+
 
 .oppaci {
   opacity: 1;
@@ -34,4 +52,8 @@ li.nav-item {
 
 .active {
   background-color: #c0c0c0;
+}
+
+.bg-color {
+  background-color: lightgrey;
 }

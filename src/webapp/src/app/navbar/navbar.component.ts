@@ -21,16 +21,19 @@ export class NavbarComponent implements OnInit {
 
   onScroll(data) {
 
-    // wenn top = 0 && scroll = down => !show
+    // wenn top = 22px && scroll = down => !show
     const myPageYOffset = data.target.defaultView.pageYOffset;
-    if (this.navbar.nativeElement.getBoundingClientRect().top <= 0 && this.lastScrollPosition < myPageYOffset) {
+    //TODO dissappear on mobiles
+    /*console.log(this.navbar.nativeElement.getBoundingClientRect().top );
+    console.log(this.lastScrollPosition < myPageYOffset);*/
+    if (this.navbar.nativeElement.getBoundingClientRect().top <= 22 && this.lastScrollPosition < myPageYOffset) {
       this.show = false;
     } else if (this.lastScrollPosition > myPageYOffset) {
       this.sticky = true;
       this.show = true;
     }
 
-    if (this.navbar.nativeElement.getBoundingClientRect().top > 0) {
+    if (this.navbar.nativeElement.getBoundingClientRect().top > 22) {
       this.sticky = false;
       this.show = true;
     }

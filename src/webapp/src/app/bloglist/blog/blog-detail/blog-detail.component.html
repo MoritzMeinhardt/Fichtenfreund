@@ -11,7 +11,7 @@
             <h3 class="letter-spacing">{{myBlog?.title | uppercase}}</h3>
             <div *ngFor="let p of myBlog?.paragraphs; let i = index">
               <div class="imageContainer" *ngIf="p.paragraphPic">
-                <img *ngIf="p" src="{{ baseUrl + '/api/file-upload/' + p.paragraphPic }}" alt="">
+                <img *ngIf="p" src="{{ baseUrl + '/api/file-upload/' + p.paragraphPic }}" alt="" (click)="openGallery(i)">
               </div>
               <h2 class="letter-spacing">{{p?.paragraphTitle}}</h2>
               <p>{{p?.paragraphText}}</p>
@@ -24,3 +24,14 @@
   </div>
   <app-comments *ngIf="myBlog" [myBlog]="myBlog"></app-comments>
 </div>
+
+<ngx-image-gallery
+  [images]="images"
+  [conf]="conf"
+  (onOpen)="galleryOpened($event)"
+  (onClose)="galleryClosed()"
+  (onImageClicked)="galleryImageClicked($event)"
+  (onImageChange)="galleryImageChanged($event)"
+  (onDelete)="deleteImage($event)"
+  (click)="clickInside($event)"
+></ngx-image-gallery>

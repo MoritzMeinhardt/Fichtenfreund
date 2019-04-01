@@ -1,22 +1,25 @@
+  <nav #navbar (scroll)="onScroll($event)" (window:scroll)="onScroll($event)" class="navbar navbar-expand-lg navbar-light bg-light letter-spacing " [ngClass]="{'dontShow': !show, 'oppaci': sticky}">
 
-  <nav #navbar (window:scroll)="onScroll($event)" class="navbar navbar-expand-lg navbar-light bg-light letter-spacing " [ngClass]="{'dontShow': !show, 'oppaci': sticky}">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="w-100 bg-color d-block d-lg-none">
+      <button class="navbar-toggler bg-color" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <div class="collapse navbar-collapse bg-color" id="navbarSupportedContent">
       <ul class="navbar-nav w-100 mr-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/blog" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">REISE</a>
+          <a class="nav-link pl-3" routerLink="/blog" [routerLinkActiveOptions]="{exact:true}" routerLinkActive="active">REISE</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/blog/new" routerLinkActive="active">NEW BLOG</a>
+          <a class="nav-link pl-3" routerLink="/blog/new" routerLinkActive="active">NEW BLOG</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">LOGIN</a>
+          <a class="nav-link pl-3" routerLink="/login" routerLinkActive="active">LOGIN</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/blog/sonstiges" routerLinkActive="active">SONSTIGES</a>
+          <a class="nav-link pl-3" routerLink="/blog/sonstiges" routerLinkActive="active">SONSTIGES</a>
         </li>
       </ul>
       <!--    <form class="form-inline my-2 my-lg-0">
