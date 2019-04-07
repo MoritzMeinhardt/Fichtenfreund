@@ -51,7 +51,6 @@ export class BlogEditComponent implements OnInit {
   }
 
   fillForm() {
-    console.log(this.myBlog);
     this.editBlogForm.patchValue(
       {
         'title': this.myBlog.title,
@@ -95,7 +94,6 @@ export class BlogEditComponent implements OnInit {
   }
 
   onSubmit() {
-    debugger;
     const blog = new Blog(this.editBlogForm.get('title').value, this.editBlogForm.get('titlePicture').value, new Date(Date.now()), 'PLATZHALTER', this.editBlogForm.get('paragraphs').value, []);
     if (this.id) {
       this.blogService.update(this.id, blog).subscribe(

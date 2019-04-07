@@ -20,7 +20,8 @@ router.get('/:id', (req, res) => {
     Blog.findById(req.params.id, (err, blog) => {
         res.json(blog)
     })
-}).put('/:id', passport.authenticate('jwt', {session:false}), (req,res) => {
+}).put('/:id', (req,res) => {
+// }).put('/:id', passport.authenticate('jwt', {session:false}), (req,res) => { // TODO ENABLE authentication
     Blog.findById(req.params.id, (err, blog) => {
         console.log(err);
         blog.title = req.body.title;
@@ -29,7 +30,8 @@ router.get('/:id', (req, res) => {
         blog.save();
         res.json(blog);
     })
-}).patch('/:id', passport.authenticate('jwt', {session:false}), (req,res)=>{
+}).patch('/:id', (req,res)=>{
+// }).patch('/:id', passport.authenticate('jwt', {session:false}), (req,res)=>{ // TODO ENABLE authentication
     Blog.findById(req.params.id, (err, blog) => {
         if(req.body._id){
             delete req.body._id;

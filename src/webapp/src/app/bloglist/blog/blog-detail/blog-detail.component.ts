@@ -18,7 +18,6 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   @ViewChild(NgxImageGalleryComponent) ngxImageGallery: NgxImageGalleryComponent;
   @HostListener('document:click', ['$event']) clickedOutside($event){
     // here you can hide your menu
-    console.log("CLICKED OUTSIDE");
   };
 
   // gallery configuration

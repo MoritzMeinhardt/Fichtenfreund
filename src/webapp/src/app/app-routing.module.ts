@@ -4,14 +4,15 @@ import {BloglistComponent} from "./bloglist/bloglist.component";
 import {BlogDetailComponent} from "./bloglist/blog/blog-detail/blog-detail.component";
 import {BlogEditComponent} from "./bloglist/blog/blog-detail/blog-edit/blog-edit.component";
 import {LoginComponent} from "./login/login.component";
+import {OnlyLoggedInUsersGuardGuard} from "./shared/only-logged-in-users-guard.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: '/blog', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'blog', component: BloglistComponent},
-  {path: 'blog/new', component:BlogEditComponent},
+  {path: 'blog/new', component:BlogEditComponent, canActivate: [OnlyLoggedInUsersGuardGuard]},
   {path: 'blog/:id', component:BlogDetailComponent},
-  {path: 'blog/:id/edit', component:BlogEditComponent},
+  {path: 'blog/:id/edit', component:BlogEditComponent, canActivate: [OnlyLoggedInUsersGuardGuard]},
 /*  {path: ':category', component: BlogDetailComponent, children: [
       {path: ':id', component: BlogDetailComponent}
     ]},*/
