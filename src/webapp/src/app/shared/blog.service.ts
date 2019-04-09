@@ -20,13 +20,11 @@ export class BlogService {
   }
 
   getBlog(id: string){
-    console.log('Get Blog id: ' + id);
     return this.http.get(this.urlBase + '/api/blogs/' + id);
   }
 
   add(newBlog: Blog) {
     const token = this.authService.getToken();
-    console.log("token: ", this.authService.getToken());
 
     const httpOptions = {
       headers: new HttpHeaders({

@@ -128,10 +128,8 @@ export class BlogEditComponent implements OnInit {
     );
   }
 
-  onPictureSelected(path, index, c:FormGroup) {
-    console.log(c);
+  onPictureSelected(path, index, c: FormGroup) {
     c.patchValue({'paragraphPic': path})
-    console.log(c);
   }
 
   onProgress(progress) {

@@ -39,14 +39,11 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    console.log(this.myBlog);
-
     if (this.myBlog){
 
     } else {
       this.route.params.subscribe(
         (params: Params) => {
-          console.log(params['id']);
           this.id = params['id'];
           this.blogService.getBlog(this.id).subscribe(
             (blog: Blog) => {
@@ -101,33 +98,33 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   // EVENTS
   // callback on gallery opened
   galleryOpened(index) {
-    console.info('Gallery opened at index ', index);
+    // console.info('Gallery opened at index ', index);
   }
 
   // callback on gallery closed
   galleryClosed() {
-    console.info('Gallery closed.');
+    // console.info('Gallery closed.');
   }
 
   clickInside(event) {
     event.preventDefault();
-    console.log(event);
+    // console.log(event);
     event.stopPropagation();  // <- that will stop propagation on lower layers
-    console.log("CLICKED INSIDE, MENU WON'T HIDE");
+    // console.log("CLICKED INSIDE, MENU WON'T HIDE");
   }
 
   // callback on gallery image clicked
   galleryImageClicked(index) {
-    console.info('Gallery image clicked with index ', index);
+    // console.info('Gallery image clicked with index ', index);
   }
 
   // callback on gallery image changed
   galleryImageChanged(index) {
-    console.info('Gallery image changed to index ', index);
+    // console.info('Gallery image changed to index ', index);
   }
 
   // callback on user clicked delete button
   deleteImage(index) {
-    console.info('Delete image at index ', index);
+    // console.info('Delete image at index ', index);
   }
 }

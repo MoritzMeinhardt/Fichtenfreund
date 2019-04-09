@@ -17,7 +17,6 @@ export class FileUploadComponent {
   constructor(private http: HttpClient) {}
 
   onFileSelected(event) {
-    console.log(event);
     this.selectedFile = <File> event.target.files[0];
   }
   onUpload() {
