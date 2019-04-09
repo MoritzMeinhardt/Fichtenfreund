@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpRequest, HttpResponse} from "@angular/common/http";
 
-// const URL = '/api/';
-const URL = environment.urlBase +'/api/file-upload'; //'https://evening-anchorage-3159.herokuapp.com/api/';
+const URL = environment.urlBase +'/api/file-upload';
 
 @Component({
   selector: 'app-file-upload',
@@ -13,6 +12,7 @@ const URL = environment.urlBase +'/api/file-upload'; //'https://evening-anchorag
 export class FileUploadComponent {
   selectedFile: File = null;
   @Output() pictureSelected = new EventEmitter<String>();
+  @Output() progress = new EventEmitter<String>();
 
   constructor(private http: HttpClient) {}
 
@@ -20,12 +20,17 @@ export class FileUploadComponent {
     console.log(event);
     this.selectedFile = <File> event.target.files[0];
   }
-  onUpload(){
+  onUpload() {
     const fd = new FormData();
     fd.append('file-to-upload', this.selectedFile, this.selectedFile.name);
-    this.http.post(URL, fd).subscribe((res:any) => {
-      console.log(res);
-      this.pictureSelected.next(res.path);
-    })
+    this.http.post(URL, fd, { reportProgress: true, observe: 'events' }).subscribe((res:any) => {
+      if (res instanceof HttpResponse){ // TODO better condition
+        this.pictureSelected.next(res.body.path);
+      } else {
+        if (res.type === 1) {
+          this.progress.next('' + res.loaded / res.total);
+        }
+      }
+    });
   }
 }

@@ -17,8 +17,8 @@ export class BlogEditComponent implements OnInit {
   private id: string;
   private myBlog: Blog;
   submitText = 'Speichern';
-  showPreview = false;/*
-  public uploader:FileUploader = new FileUploader({url: environment.urlBase + ':80/api/file-upload', autoUpload: true});*/
+  showPreview = false;
+  progress = 0;
 
   constructor(private blogService: BlogService, private route: ActivatedRoute) { }
 
@@ -132,9 +132,9 @@ export class BlogEditComponent implements OnInit {
     console.log(c);
     c.patchValue({'paragraphPic': path})
     console.log(c);
-    /*
-    this.editBlogForm.patchValue(
-      {'titlePicture': path}
-    );*/
+  }
+
+  onProgress(progress) {
+    this.progress = progress * 100;
   }
 }

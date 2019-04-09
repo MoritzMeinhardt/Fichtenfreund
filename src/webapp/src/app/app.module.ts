@@ -25,7 +25,6 @@ import {NgxImageGalleryModule} from "ngx-image-gallery";
 import { FileUploadComponent } from './file-upload/file-upload.component';
 
 export function tokenGetter() {
-  console.log("my token " + localStorage.getItem('id_token'));
   return localStorage.getItem('id_token');
 }
 
