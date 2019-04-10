@@ -9,6 +9,7 @@
           <div>
             <h1>{{myBlog?.date | date:'d. MMMM y':'de-DE'}}</h1>
             <h3 class="letter-spacing">{{myBlog?.title | uppercase}}</h3>
+            <button *ngIf="isAuthenticated" class="btn" routerLink="edit">Edit</button>
             <div *ngFor="let p of myBlog?.paragraphs; let i = index">
               <div class="imageContainer" *ngIf="p.paragraphPic">
                 <img *ngIf="p" src="{{ baseUrl + '/api/file-upload/' + p.paragraphPic }}" alt="" (click)="openGallery(i)">
@@ -19,7 +20,6 @@
           </div>
         </div>
       </div>
-      <button class="btn" routerLink="edit">Edit</button>
     </div>
   </div>
   <app-comments *ngIf="myBlog" [myBlog]="myBlog"></app-comments>

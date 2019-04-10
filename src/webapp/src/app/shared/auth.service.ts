@@ -46,6 +46,10 @@ export class AuthService {
     return tokenNotExpired(null, token);
   }*/
 
+  public isAuthenticated(): boolean {
+    return this.authToken !== null; // TODO need condition if token is expired
+  }
+
   logout() {
     this.authToken = null;
     this.user = null;

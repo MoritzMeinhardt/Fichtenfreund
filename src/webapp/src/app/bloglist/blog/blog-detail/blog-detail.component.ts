@@ -4,6 +4,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {BlogService} from "../../../shared/blog.service";
 import {environment} from "../../../../environments/environment";
 import {GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent} from "ngx-image-gallery";
+import {AuthService} from "../../../shared/auth.service";
 
 @Component({
   selector: 'app-blog-detail',
@@ -33,15 +34,19 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
 
   private id: string;
   public baseUrl = environment.urlBase;
+  public isAuthenticated = false;
 
   constructor(private route: ActivatedRoute,
-              private blogService: BlogService) { }
+              private blogService: BlogService,
+              private authService: AuthService) { }
 
   ngOnInit() {
 
     if (this.myBlog){
 
     } else {
+      this.isAuthenticated = this.authService.isAuthenticated();
+
       this.route.params.subscribe(
         (params: Params) => {
           this.id = params['id'];

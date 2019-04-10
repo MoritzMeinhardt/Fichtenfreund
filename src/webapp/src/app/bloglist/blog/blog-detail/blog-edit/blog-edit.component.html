@@ -51,7 +51,7 @@
           <label class="col-2 col-form-label" for="pInputFile">Paragraphbild hochladen:</label>
           <div class="col-10 w-100">
             <input formControlName="paragraphPic" type="text" class="form-control" disabled>
-            <app-file-upload id="pInputFile" (pictureSelected)="onPictureSelected($event, index, c)" aria-describedby="fileHelp2"></app-file-upload>
+            <app-file-upload id="pInputFile" (pictureSelected)="onPictureSelected($event, index, c)" (progress)="onProgress($event)" aria-describedby="fileHelp2"></app-file-upload>
             <small id="fileHelp2" class="form-text text-muted">Put paragraph picture here.</small>
           </div>
         </div>
