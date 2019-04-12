@@ -11,7 +11,7 @@ import {environment} from "../../environments/environment";
 })
 export class HomeComponent implements OnInit {
 
-  defaultImg = 'https://images.unsplash.com/photo-1535725967168-fbfdcdab1f21?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1573&q=80';
+  defaultImg = environment.urlBase + '/api/file-upload/_MG_8434.jpg';
   img = this.defaultImg;
 
   constructor(private blogService: BlogService) {}
