@@ -77,12 +77,9 @@ app.post('/api/file-upload', upload.single('file-to-upload'), (req, res) => {
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);
     src.pipe(dest);
-    console.log("path");
-    console.log(path);
-    console.log("path.basename");
-    console.log(path.basename);
-    console.log("req.originalUrl")
-    console.log(req.originalUrl)
+    fs.unlink( tmp_path, (err) => {
+        if (err) throw err;
+    });
     src.on('end', function() { res.json({sucess: 'true', path: req.file.originalname}); });
     src.on('error', function(err) { res.json({sucess: 'false ', err: err, path: null}) });
 });
