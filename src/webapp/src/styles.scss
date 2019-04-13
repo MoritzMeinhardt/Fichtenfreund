@@ -77,18 +77,6 @@ p {
   margin-top: 20px;
 }
 
-/*Cut pictures in middle*/
-/*img {
-  position:absolute;
-  left: -100%;
-  right: -100%;
-  top: -100%;
-  bottom: -100%;
-  margin: auto;
-  min-height: 100%;
-  min-width: 100%;
-}*/
-
 .form-control {
   border-radius: 0%;
 }
@@ -99,4 +87,39 @@ textarea.ng-invalid.ng-touched {
 
 input.ng-invalid.ng-touched {
   border: 1px solid firebrick;
+}
+
+.btn {
+  border-radius: 0;
+}
+
+.ff-btn-primary {
+  background-color: darkgrey;
+  color: black;
+  font-family: Montserrat, sans-serif;
+  font-weight: 200;
+  border: none;
+  letter-spacing: 1px;
+}
+
+.ff-btn-primary:hover {
+  color: white;
+  font-weight: 200;
+}
+
+.ff-btn-primary:disabled {
+  background-color: darkgrey;
+  color: white;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+
+.extra-margin {
+  margin-top: 10px;
+}
+
+@media (min-width: 992px) {
+  .extra-margin {
+    margin-top: 100px;
+  }
 }
