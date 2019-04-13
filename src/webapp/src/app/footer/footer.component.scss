@@ -17,3 +17,12 @@ h2 {
   height: 200px;
   overflow: hidden;
 }
+
+.fichten-background {
+  background-image: url("http://localhost:80/api/file-upload/footer.jpg");
+}
+
+a:hover {
+  color: unset;
+  font-weight: bold;
+}
