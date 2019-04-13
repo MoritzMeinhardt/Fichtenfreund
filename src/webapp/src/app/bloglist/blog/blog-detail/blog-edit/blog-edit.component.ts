@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BlogService} from "../../../../shared/blog.service";
 import {Blog} from "../../blog.model";
-import {ActivatedRoute, Params} from "@angular/router";
-import { FileUploader } from 'ng2-file-upload';
-import {environment} from "../../../../../environments/environment";
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {AlertService} from "../../../../shared/alert.service";
 
 @Component({
   selector: 'app-blog-edit',
@@ -18,16 +17,16 @@ export class BlogEditComponent implements OnInit {
   private myBlog: Blog;
   submitText = 'Speichern';
   showPreview = false;
-  progress = 0;
+  progress = [];
+  public successMessage;
 
-  constructor(private blogService: BlogService, private route: ActivatedRoute) { }
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private router: Router, private alertService: AlertService) { }
 
   ngOnInit() {
 
     this.editBlogForm = new FormGroup( {
-/*      'test': new FormGroup({}),*/
-        'title': new FormControl(null),
-        'titlePicture': new FormControl(null),
+        'title': new FormControl(null, Validators.required),
+        'titlePicture': new FormControl({value: null, disabled: true}),
         'date': new FormControl(null),
         'paragraphs': new FormArray([])
     });
@@ -46,8 +45,7 @@ export class BlogEditComponent implements OnInit {
           );
         }
       }
-    )
-
+    );
   }
 
   fillForm() {
@@ -62,14 +60,6 @@ export class BlogEditComponent implements OnInit {
     });
   }
 
-/*  onCreateParagraph() {
-    return new FormGroup({
-        'paragraphTitle': new FormControl(null),
-        'paragraphPic': new FormControl(null),
-        'paragraphText': new FormControl(null)
-      }
-    );
-  }*/
   OnPrepopulateParagraph(p: any) {
     return new FormGroup({
         'paragraphTitle': new FormControl(p.paragraphTitle),
@@ -82,7 +72,7 @@ export class BlogEditComponent implements OnInit {
   onAddParagraph() {
     const formGroup = new FormGroup({
         'paragraphTitle': new FormControl(null),
-        'paragraphPic': new FormControl(null),
+        'paragraphPic': new FormControl({ value: null, disabled: true }),
         'paragraphText': new FormControl(null)
       }
     );
@@ -94,16 +84,39 @@ export class BlogEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const blog = new Blog(this.editBlogForm.get('title').value, this.editBlogForm.get('titlePicture').value, new Date(Date.now()), 'PLATZHALTER', this.editBlogForm.get('paragraphs').value, []);
+
+    for (let i = -1; i < this.progress.length; i ++) {
+      if (this.progress[i] && this.progress[i] !== 100) {
+        debugger;
+        alert('Not all images uploaded.');
+        return;
+      }
+    }
+
+    const blog = new Blog(this.editBlogForm.get('title').value,
+      this.editBlogForm.get('titlePicture').value,
+      new Date(Date.now()), 'PLATZHALTER',
+      this.editBlogForm.get('paragraphs').value,
+      []);
+
     if (this.id) {
       this.blogService.update(this.id, blog).subscribe(
-        (next) => console.log('Update:' + next),
-        (err) => console.log('Update:' + err)
-      );
+        () => {
+          this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' successful updated!', type: 'success'});
+          this.router.navigate(['/blog/' + this.route.snapshot.params['id']]);
+        },
+      (err) => {
+        this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' not updated! ' + err, type: 'danger'});
+      });
     } else {
       this.blogService.add(blog).subscribe(
-        (next) => console.log('Add: ' + next),
-        (err) => console.log('Add: ' + err)
+        (next: Blog) => {
+          this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' successful created!', type: 'success'});
+          this.router.navigate(['/blog/' + next._id]);
+        },
+        (err) => {
+          this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' not updated! ' + err, type: 'danger'});
+        }
       );
     }
   }
@@ -129,10 +142,12 @@ export class BlogEditComponent implements OnInit {
   }
 
   onPictureSelected(path, index, c: FormGroup) {
-    c.patchValue({'paragraphPic': path})
+    c.patchValue({'paragraphPic': path});
   }
 
-  onProgress(progress) {
-    this.progress = progress * 100;
+  onProgress(progress, index: number) {
+    this.progress[index] = progress * 100;
   }
+
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../shared/auth.service";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../shared/auth.service';
+import {AlertService} from '../shared/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
@@ -22,13 +23,14 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.authenticate(this.loginForm.get('username').value, this.loginForm.get('password').value).subscribe(
-      (data:any) => {
-        console.log(data);
-        if(data.success){
+      (data: any) => {
+        if (data.success) {
           this.authService.storeUserData(data.token, data.user);
+          this.alertService.addAlert({message: 'Welcome back ' + data.user.username + '!', type: 'success'});
         }
       },
-      (err) => {console.log(err)}
+      (err) => {
+        this.alertService.addAlert({message: 'Try again.', type: 'danger'}); }
     );
   }
 

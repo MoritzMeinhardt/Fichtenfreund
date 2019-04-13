@@ -23,7 +23,7 @@ export class FileUploadComponent {
     const fd = new FormData();
     fd.append('file-to-upload', this.selectedFile, this.selectedFile.name);
     this.http.post(URL, fd, { reportProgress: true, observe: 'events' }).subscribe((res:any) => {
-      if (res instanceof HttpResponse){ // TODO better condition
+      if (res instanceof HttpResponse) { // TODO better condition
         this.pictureSelected.next(res.body.path);
       } else {
         if (res.type === 1) {

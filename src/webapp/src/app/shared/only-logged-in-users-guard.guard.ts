@@ -12,11 +12,9 @@ export class OnlyLoggedInUsersGuardGuard implements CanActivate {
 
   canActivate( next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    console.log("User logged in?");
     if (this.authService.getToken() != null) {
       return true;
     } // TODO use isAuthenticated
-    console.log("not logged in!");
     return false;
   }
 }
