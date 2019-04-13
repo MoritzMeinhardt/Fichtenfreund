@@ -1,22 +1,19 @@
-.pic {
-  height: 15em;
-  width: 15em; // TODO pic gets wider if transformed
-  max-width: 400px;
-  overflow: hidden;
-}
-
-img:hover {
-  transform: scale(1.3);
-}
 
 img {
   height: 100%;
   width: 100%;
   object-fit: cover;
-  transition: transform .4s;
 }
 h2 {
  margin-bottom: 20px;
   font-weight: 100;
   color: lightgrey;
+}
+
+.insta-container {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+  overflow: hidden;
 }
