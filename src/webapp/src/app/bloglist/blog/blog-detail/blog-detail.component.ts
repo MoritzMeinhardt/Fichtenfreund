@@ -1,10 +1,10 @@
 import {Component, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Blog} from "../blog.model";
-import {ActivatedRoute, Params} from "@angular/router";
-import {BlogService} from "../../../shared/blog.service";
-import {environment} from "../../../../environments/environment";
-import {GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent} from "ngx-image-gallery";
-import {AuthService} from "../../../shared/auth.service";
+import {Blog} from '../blog.model';
+import {ActivatedRoute, Params} from '@angular/router';
+import {BlogService} from '../../../shared/blog.service';
+import {environment} from '../../../../environments/environment';
+import {GALLERY_CONF, GALLERY_IMAGE, NgxImageGalleryComponent} from 'ngx-image-gallery';
+import {AuthService} from '../../../shared/auth.service';
 
 @Component({
   selector: 'app-blog-detail',
@@ -17,7 +17,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   @Input() myBlog: Blog;
 
   @ViewChild(NgxImageGalleryComponent) ngxImageGallery: NgxImageGalleryComponent;
-  @HostListener('document:click', ['$event']) clickedOutside($event){
+  @HostListener('document:click', ['$event']) clickedOutside($event) {
     // here you can hide your menu
   };
 
@@ -35,14 +35,15 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
   private id: string;
   public baseUrl = environment.urlBase;
   public isAuthenticated = false;
+  public isLoading = true;
 
   constructor(private route: ActivatedRoute,
               private blogService: BlogService,
               private authService: AuthService) { }
 
   ngOnInit() {
-
-    if (this.myBlog){
+    this.isLoading = true;
+    if (this.myBlog) {
 
     } else {
       this.isAuthenticated = this.authService.isAuthenticated();
@@ -62,8 +63,10 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
             }
           );
         }
-      )
+      );
+    this.isLoading = false;
     }
+
   }
 
   ngOnDestroy() {
@@ -115,7 +118,7 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
     event.preventDefault();
     // console.log(event);
     event.stopPropagation();  // <- that will stop propagation on lower layers
-    // console.log("CLICKED INSIDE, MENU WON'T HIDE");
+    // console.log('CLICKED INSIDE, MENU WON'T HIDE');
   }
 
   // callback on gallery image clicked
