@@ -11,13 +11,18 @@ export class BloglistComponent implements OnInit {
 
   page = 10;
   bloglist: Blog[];
+  public isLoading = false;
 
   constructor(private blogService: BlogService) { }
 
   ngOnInit() {
     this.blogService.onChangedDetail.next('default');
+    this.isLoading = true;
     this.blogService.getBlogs().subscribe(
-      (blogs: Blog []) => {this.bloglist = blogs}
+      (blogs: Blog []) => {
+        this.bloglist = blogs;
+        this.isLoading = false;
+      }
     );
   }
 

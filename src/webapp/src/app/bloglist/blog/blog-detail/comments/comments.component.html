@@ -1,11 +1,9 @@
 <div class="extra-margin p-3 p-md-0">
-  <!--BLOG UNDEFINED-->
   <ul *ngFor="let comment of myBlog.comments" class="comment list-unstyled">
 
     <li class="media mt-2 mt-sm-5">
       <div class="img-frame mr-3">
-        <!--<img class="mr-3" src="http://fichtenfreund.de/api/file-upload/comment.svg" alt="Generic placeholder image">-->
-        <img class="mr-3" src="https://image.flaticon.com/icons/svg/15/15858.svg" alt="Generic placeholder image">
+        <img class="mr-3" src="https://image.flaticon.com/icons/svg/15/15858.svg" alt="image of user">
       </div>
       <div class="media-body">
         <h5 class="mt-0">{{comment?.name}}, {{comment.created | date:'dd.MM.yy'}}</h5>

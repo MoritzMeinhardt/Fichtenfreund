@@ -25,6 +25,7 @@ import {NgxImageGalleryModule} from 'ngx-image-gallery';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import {AlertService} from './shared/alert.service';
 import {AlertsComponent} from './alerts/alerts.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -46,7 +47,8 @@ export function tokenGetter() {
     CommentFormComponent,
     LoginComponent,
     FileUploadComponent,
-    AlertsComponent
+    AlertsComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

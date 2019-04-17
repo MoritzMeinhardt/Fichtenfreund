@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BlogService} from "../shared/blog.service";
-import {ActivatedRoute, Params} from "@angular/router";
-import {environment} from "../../environments/environment";
+import {BlogService} from '../shared/blog.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -13,18 +12,20 @@ export class HomeComponent implements OnInit {
 
   defaultImg = environment.urlBase + '/api/file-upload/_MG_8434.jpg';
   img = this.defaultImg;
+  public isLoading = true;
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.blogService.onChangedDetail.subscribe(
       (img: string) => {
         if (!img || img === 'default') {
           this.img = this.defaultImg;
-        }
-        else {
+        } else {
           this.img = environment.urlBase + '/api/file-upload/' + img;
         }
+      this.isLoading = false;
       }
     );
   }

@@ -1,5 +1,7 @@
-<app-blog class="mt-4" *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog._id"></app-blog>
-
+<app-loading-spinner position="top" *ngIf="isLoading"></app-loading-spinner>
+<div *ngIf="!isLoading">
+  <app-blog class="mt-4" *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog._id"></app-blog>
+</div>
 
 <!--<div class="row">
   <div class="col-lg-10 offset-lg-1">
