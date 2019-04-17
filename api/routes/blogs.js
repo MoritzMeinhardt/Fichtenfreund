@@ -6,7 +6,7 @@ const config = require('../config/database');
 const Blog = require('../models/blog');
 
 router.get('/',  (req, res) => {
-    Blog.find({}, (err, blogs) => {
+    Blog.find({}).limit(100).sort({_id: -1}).exec((err, blogs) => {
         res.json(blogs);
     })
 }).post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
