@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentInit, AfterViewChecked, Component, OnInit} from '@angular/core';
 import {Blog} from "./blog/blog.model";
 import {BlogService} from "../shared/blog.service";
 
@@ -7,7 +7,7 @@ import {BlogService} from "../shared/blog.service";
   templateUrl: './bloglist.component.html',
   styleUrls: ['./bloglist.component.scss']
 })
-export class BloglistComponent implements OnInit {
+export class BloglistComponent implements OnInit, AfterContentInit {
 
   page = 10;
   bloglist: Blog[];
@@ -21,9 +21,12 @@ export class BloglistComponent implements OnInit {
     this.blogService.getBlogs().subscribe(
       (blogs: Blog []) => {
         this.bloglist = blogs;
-        this.isLoading = false;
       }
     );
+  }
+
+  ngAfterContentInit(): void {
+    this.isLoading = false;
   }
 
 }

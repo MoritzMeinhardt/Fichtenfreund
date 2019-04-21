@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {BlogService} from "../../../../shared/blog.service";
-import {Blog} from "../../blog.model";
-import {ActivatedRoute, Params, Router} from "@angular/router";
-import {AlertService} from "../../../../shared/alert.service";
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {BlogService} from '../../../../shared/blog.service';
+import {Blog} from '../../blog.model';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {AlertService} from '../../../../shared/alert.service';
 
 @Component({
   selector: 'app-blog-edit',
@@ -14,28 +14,30 @@ export class BlogEditComponent implements OnInit {
 
   editBlogForm: FormGroup;
   private id: string;
-  private myBlog: Blog;
-  submitText = 'Speichern';
+  public myBlog: Blog;
+  submitText = 'save';
   showPreview = false;
   progress = [];
-  public successMessage;
+  progress_gallery = [];
 
-  constructor(private blogService: BlogService, private route: ActivatedRoute, private router: Router, private alertService: AlertService) { }
+  constructor(private blogService: BlogService, private route: ActivatedRoute, private router: Router,
+              private alertService: AlertService) { }
 
   ngOnInit() {
 
     this.editBlogForm = new FormGroup( {
-        'title': new FormControl(null, Validators.required),
-        'titlePicture': new FormControl({value: null, disabled: true}),
-        'date': new FormControl(null),
-        'paragraphs': new FormArray([])
+      'title': new FormControl(null, Validators.required),
+      'titlePicture': new FormControl( null),
+      'date': new FormControl(null),
+      'paragraphs': new FormArray([]),
+      'galleryImages': new FormArray([])
     });
 
     this.route.params.subscribe(
       (params: Params) => {
         this.id = params['id'];
         if (this.id) {
-          this.submitText = 'Aktualisieren';
+          this.submitText = 'update';
           this.blogService.getBlog(this.id).subscribe(
             (blog: Blog) => {
               this.myBlog = blog;
@@ -58,6 +60,9 @@ export class BlogEditComponent implements OnInit {
     this.myBlog.paragraphs.forEach((p) => {
       (<FormArray>this.editBlogForm.get('paragraphs')).push(this.OnPrepopulateParagraph(p));
     });
+    this.myBlog.galleryImages.forEach((i) => {
+      (<FormArray>this.editBlogForm.get('galleryImages')).push(this.onPrepopulateGalleryImages(i));
+    });
   }
 
   OnPrepopulateParagraph(p: any) {
@@ -72,7 +77,7 @@ export class BlogEditComponent implements OnInit {
   onAddParagraph() {
     const formGroup = new FormGroup({
         'paragraphTitle': new FormControl(null),
-        'paragraphPic': new FormControl({ value: null, disabled: true }),
+        'paragraphPic': new FormControl(null),
         'paragraphText': new FormControl(null)
       }
     );
@@ -83,11 +88,33 @@ export class BlogEditComponent implements OnInit {
     (<FormArray>this.editBlogForm.get('paragraphs')).removeAt(index);
   }
 
+  onPrepopulateGalleryImages(p: any) {
+    return new FormGroup({
+        'caption': new FormControl(p.caption),
+        'url': new FormControl(p.url),
+        'description': new FormControl(p.description)
+      }
+    );
+  }
+
+  onAddGalleryImage() {
+    const formGroup = new FormGroup({
+        'caption': new FormControl(null),
+        'url': new FormControl(null),
+        'description': new FormControl(null)
+      }
+    );
+    (<FormArray>this.editBlogForm.get('galleryImages')).push(formGroup);
+  }
+
+  onDeleteGalleryImage(index: number) {
+    (<FormArray>this.editBlogForm.get('galleryImages')).removeAt(index);
+  }
+
   onSubmit() {
 
     for (let i = -1; i < this.progress.length; i ++) {
       if (this.progress[i] && this.progress[i] !== 100) {
-        debugger;
         alert('Not all images uploaded.');
         return;
       }
@@ -97,7 +124,7 @@ export class BlogEditComponent implements OnInit {
       this.editBlogForm.get('titlePicture').value,
       new Date(Date.now()), 'PLATZHALTER',
       this.editBlogForm.get('paragraphs').value,
-      []);
+      [], this.editBlogForm.get('galleryImages').value);
 
     if (this.id) {
       this.blogService.update(this.id, blog).subscribe(
@@ -122,7 +149,8 @@ export class BlogEditComponent implements OnInit {
   }
 
   onPreview() {
-    this.myBlog = new Blog(this.editBlogForm.get('title').value, this.editBlogForm.get('titlePicture').value, new Date(Date.now()), 'PLATZHALTER', this.editBlogForm.get('paragraphs').value, []);
+    this.myBlog = new Blog(this.editBlogForm.get('title').value, this.editBlogForm.get('titlePicture').value,
+      new Date(Date.now()), 'PLATZHALTER', this.editBlogForm.get('paragraphs').value, [], this.editBlogForm.get('galleryImages').value);
     this.showPreview = true;
   }
 
@@ -134,6 +162,7 @@ export class BlogEditComponent implements OnInit {
   }
 
   get paragraphs() { return <FormArray>this.editBlogForm.get('paragraphs'); }
+  get galleryImages() { return <FormArray>this.editBlogForm.get('galleryImages'); }
 
   onMainPictureSelected(path) {
     this.editBlogForm.patchValue(
@@ -145,9 +174,16 @@ export class BlogEditComponent implements OnInit {
     c.patchValue({'paragraphPic': path});
   }
 
+  onGalleryPictureSelected(path, index, c: FormGroup) {
+    c.patchValue({'url': path});
+  }
+
   onProgress(progress, index: number) {
     this.progress[index] = progress * 100;
   }
 
+  onProgressGallery(progress, index: number) {
+    this.progress_gallery[index] = progress * 100;
+  }
 
 }

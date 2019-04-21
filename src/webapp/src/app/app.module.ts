@@ -26,6 +26,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import {AlertService} from './shared/alert.service';
 import {AlertsComponent} from './alerts/alerts.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -48,7 +49,8 @@ export function tokenGetter() {
     LoginComponent,
     FileUploadComponent,
     AlertsComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    GalleryComponent
   ],
   imports: [
     BrowserModule,

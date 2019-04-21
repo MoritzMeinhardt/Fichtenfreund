@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Output} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient, HttpRequest, HttpResponse} from "@angular/common/http";
+import { Component, EventEmitter, Output } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 
-const URL = environment.urlBase +'/api/file-upload';
+const URL = environment.urlBase + '/api/file-upload';
 
 @Component({
   selector: 'app-file-upload',
@@ -18,11 +18,12 @@ export class FileUploadComponent {
 
   onFileSelected(event) {
     this.selectedFile = <File> event.target.files[0];
+    this.uploadFIle();
   }
-  onUpload() {
+  uploadFIle() {
     const fd = new FormData();
     fd.append('file-to-upload', this.selectedFile, this.selectedFile.name);
-    this.http.post(URL, fd, { reportProgress: true, observe: 'events' }).subscribe((res:any) => {
+    this.http.post(URL, fd, { reportProgress: true, observe: 'events' }).subscribe((res: any) => {
       if (res instanceof HttpResponse) { // TODO better condition
         this.pictureSelected.next(res.body.path);
       } else {

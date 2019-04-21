@@ -1,15 +1,16 @@
-<form class="form-group" [formGroup]="editBlogForm" (ngSubmit)="onSubmit()">
+<h2 class="col">edit blog: <strong>{{myBlog?.title}}</strong> <button class="btn btn-danger float-right" (click)="onDelete()">delete blog</button></h2>
 
+<form class="form-group" [formGroup]="editBlogForm" (ngSubmit)="onSubmit()">
   <!--title-->
-  <div class="form-group-row form-inline">
+  <div class="form-group-row form-inline mb-2">
     <label class="col-2 col-form-label" for="title">Titel:</label>
     <div class="col-10 w-100">
-      <input formControlName="title" name="title" id="title" class="form-control" type="text" placeholder="Mein schöner Titel">
+      <input formControlName="title" name="title" id="title" class="form-control" type="text">
     </div>
   </div>
 
   <!--pic-->
-  <div class="form-group-row form-inline">
+  <div class="form-group-row form-inline mb-2">
     <label class="col-2 col-form-label" for="inputFile">Hauptbild hochladen:</label>
     <div class="col-10 w-100">
       <input formControlName="titlePicture" type="text" class="form-control">
@@ -19,13 +20,15 @@
     </div>
   </div>
 
-  <!--date-->
-  <div class="form-group-row form-inline">
+<!--
+  &lt;!&ndash;date&ndash;&gt;
+  <div class="form-group-row form-inline mb-3">
     <label class="col-2 col-form-label" for="date">Datum:</label>
     <div class="col-10 w-100">
       <input formControlName="date" name="date" id="date" class="form-control" type="date">
     </div>
   </div>
+-->
 
 
   <!--1. paragraph-->
@@ -34,19 +37,9 @@
     <div class="form-group"
          *ngFor="let c of paragraphs.controls; let index = index">
       <div [formGroupName]="index">
-
-        <!--title-->
-
-        <div class="form-group-row form-inline">
-          <label class="col-2 col-form-label" for="paragraphTitle">Untertitel:</label>
-          <div class="col-10 w-100 d-flex">
-            <input formControlName="paragraphTitle" name="paragraphTitle" id="paragraphTitle" class="form-control" type="text" placeholder="Mein schöner Untertitel">
-            <button type="button" class="btn btn-danger" (click)="onDeleteParagraph(index)">X</button>
-          </div>
-        </div>
-
+        <h2 class="col">paragraph number <strong>#{{index + 1}}</strong> <button class="btn btn-danger float-right" (click)="onDeleteParagraph(index)">X</button></h2>
         <!--pic-->
-        <div class="form-group-row form-inline">
+        <div class="form-group-row form-inline mb-2">
           <label class="col-2 col-form-label" for="pInputFile">Paragraphbild hochladen:</label>
           <div class="col-10 w-100">
             <input formControlName="paragraphPic" type="text" class="form-control">
@@ -56,8 +49,16 @@
           </div>
         </div>
 
+        <!--subtitle-->
+        <div class="form-group-row form-inline mb-2">
+          <label class="col-2 col-form-label" for="paragraphTitle">Untertitel:</label>
+          <div class="col-10 w-100 d-flex">
+            <input formControlName="paragraphTitle" name="paragraphTitle" id="paragraphTitle" class="form-control" type="text" placeholder="Mein schöner Untertitel">
+          </div>
+        </div>
+
         <!--text-->
-        <div class="form-group-row form-inline">
+        <div class="form-group-row form-inline mb-2">
           <label class="col-2 col-form-label" for="paragraphText">Paragraphtext:</label>
           <div class="col-10 w-100">
             <textarea formControlName="paragraphText" name="paragraphText" id="paragraphText" class="form-control w-100" rows="12"></textarea>
@@ -68,16 +69,54 @@
 
   </div>
 
+  <!--gallery images-->
+  <div class="" formArrayName="galleryImages">
+    <hr>
+    <h2 class="col" *ngIf="galleryImages.controls.length > 0">gallery images</h2>
+    <div class="form-group"
+         *ngFor="let c of galleryImages.controls; let index = index">
+      <div [formGroupName]="index">
+<!--        &lt;!&ndash;title&ndash;&gt;
+        <button>Toggle title</button>
+        <div *ngIf="" class="form-group-row form-inline">
+          <label class="col-2 col-form-label" for="caption">Bildtitel: :</label>
+          <div class="col-10 w-100 d-flex">
+            <input formControlName="caption" name="caption" id="caption" class="form-control" type="text" placeholder="Titel">
+            <button type="button" class="btn btn-danger" (click)="onDeleteGalleryImage(index)">X</button>
+          </div>
+        </div>-->
 
-  <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-secondary" (click)="onAddParagraph()">Paragraph hinzufügen</button>
+        <!--pic-->
+        <div class="form-group-row form-inline mb-2">
+          <label class="col-2 col-form-label" for="pInputFile"> Bild hochladen:</label>
+          <div class="col-10 w-100">
+            <span><input formControlName="url" type="text" class="form-control"><button class="btn btn-danger float-right" (click)="onDeleteGalleryImage(index)">X</button></span>
+            <app-file-upload id="galleryInputFile" (pictureSelected)="onGalleryPictureSelected($event, index, c)" (progress)="onProgressGallery($event, index)"></app-file-upload>
+            <p><ngb-progressbar type="info" [value]="progress_gallery[index]" ></ngb-progressbar></p>
+            <small class="form-text text-muted">Put gallery picture here.</small>
+          </div>
+        </div>
+
+<!--        &lt;!&ndash;text&ndash;&gt;
+        <div class="form-group-row form-inline">
+          <label class="col-2 col-form-label" for="paragraphText">Beschreibung:</label>
+          <div class="col-10 w-100">
+            <textarea formControlName="description" name="description" id="description" class="form-control w-100" rows="12"></textarea>
+          </div>
+        </div>-->
+      </div>
+    </div>
+
   </div>
 
+  <div class="d-flex justify-content-between mb-3">
+    <button type="button" class="btn btn-secondary" (click)="onAddParagraph()">add paragraph</button>
+    <button type="button" class="btn btn-dark" (click)="onPreview()">preview</button>
+  </div>
 
-  <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn" (click)="onPreview()">Vorschau</button>
-  <button type="submit" class="btn btn-primary" [disabled]="editBlogForm.invalid">{{submitText}}</button>
-    <button type="button" class="btn btn-danger" (click)="onDelete()">Löschen</button>
+  <div class="d-flex justify-content-between mb-3">
+    <button type="button" class="btn btn-info" (click)="onAddGalleryImage()">add gallery image</button>
+    <button type="submit" class="btn btn-primary" [disabled]="editBlogForm.invalid">{{submitText}}</button>
   </div>
     <!--Datum?-->
 
