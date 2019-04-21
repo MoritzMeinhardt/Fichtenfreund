@@ -6,7 +6,8 @@ const BlogSchema = new mongoose.Schema({
     title: String,
     titlePicture: String,
     paragraphs: [],
-    comments: []
+    comments: [],
+    galleryImages: []
 });
 
 const Blog = module.exports = mongoose.model('Blog', BlogSchema);
