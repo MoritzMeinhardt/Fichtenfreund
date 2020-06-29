@@ -7,30 +7,43 @@ import de.fichtenfreund.backend.comment.Comment;
 import de.fichtenfreund.backend.country.Country;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
-//@Entity
-//@Table(name = "BLOG")
+@Entity
+@Table(name = "BLOG_ENTRIES")
 @Data
 public class BlogEntity extends AbstractEntity {
 
-    String title;
+    @Id
+    @GenericGenerator(name = "BLOG_SEQUENCE", strategy = "sequence", parameters = {
+            @Parameter(name = "sequence", value = "BLOG_SEQUENCE")
+    })
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BLOG_SEQUENCE")
+    private Long id;
 
-    String titlePicture;
+    private String title;
 
-    List<Paragraph> paragraphs;
+    private String titlePicture;
 
-    List<Comment> comments;
+    @Transient
+    private List<Paragraph> paragraphs;
 
-    List<GalleryImage> galleryImages;
+    @Transient
+    private List<Comment> comments;
 
-    String category;
+    @Transient
+    private List<GalleryImage> galleryImages;
 
-    List<Country> referredCountries;
+    private String category;
 
-    Travel referredTravel;
+    @Transient
+    private List<Country> referredCountries;
+
+    @Transient
+    private Travel referredTravel;
 
 }
