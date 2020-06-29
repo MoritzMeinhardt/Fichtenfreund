@@ -10,6 +10,7 @@ export class Blog {
   paragraphs: IParagraph[];
   comments: IComment[];
   galleryImages: IGalleryImage[];
+  updated_on: Date;
 
   constructor (title: string, titlePicture: string, date: Date, category: string,
                paragraphs: IParagraph[], comments: IComment[], galleryImages: IGalleryImage[]) {

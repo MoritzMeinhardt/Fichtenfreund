@@ -25,7 +25,7 @@ public class BlogController {
     }
 
     @GetMapping("/{id}")
-    public BlogDTO getById(@PathParam("id") Long id) {
+    public BlogDTO getById(@PathVariable("id") Long id) {
         return convertToDTO(blogService.getById(id));
     }
 

@@ -5,12 +5,13 @@ import de.fichtenfreund.backend.blog.GalleryImage.GalleryImage;
 import de.fichtenfreund.backend.blog.paragraph.Paragraph;
 import de.fichtenfreund.backend.comment.Comment;
 import de.fichtenfreund.backend.country.Country;
+import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
-public class BlogDTO {
+public class BlogDTO extends AbstractEntity {
 
     private Long id;
 

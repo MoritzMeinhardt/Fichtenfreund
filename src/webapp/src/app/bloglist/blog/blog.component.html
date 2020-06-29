@@ -7,7 +7,7 @@
       <p>{{ myBlog?.titlePicture }}</p>
     </div>
     <div class="pl-2 pr-2">
-      <h3>{{myBlog.title | uppercase}}<span class="spanright">{{myBlog.date | date}}</span></h3>
+      <h3>{{myBlog.title | uppercase}}<span class="spanright">{{myBlog.updated_on | date}}</span></h3>
       <p>   {{ (myBlog.paragraphs[0]?.paragraphText?.length >240)? (myBlog.paragraphs[0]?.paragraphText | slice:0:240)+' ...':(myBlog.paragraphs[0]?.paragraphText) }}</p>
     </div>
   </a>
