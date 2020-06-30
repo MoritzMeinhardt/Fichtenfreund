@@ -1,5 +1,6 @@
 package de.fichtenfreund.backend.image.model;
 
+import de.fichtenfreund.backend.blog.model.BlogEntity;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,9 @@ public class ImageEntity extends AbstractEntity {
     })
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "IMAGES_SEQUENCE")
     private Long id;
+
+    @Column(name = "BLOG_ID")
+    private Long blogId;
 
     private String title;
 

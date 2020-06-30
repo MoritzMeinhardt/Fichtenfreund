@@ -90,7 +90,7 @@
         <div class="form-group-row form-inline mb-2">
           <label class="col-2 col-form-label" for="pInputFile"> Bild hochladen:</label>
           <div class="col-10 w-100">
-            <span><input formControlName="url" type="text" class="form-control"><button class="btn btn-danger float-right" (click)="onDeleteGalleryImage(index)">X</button></span>
+            <span><input formControlName="id" type="text" class="form-control"><button class="btn btn-danger float-right" (click)="onDeleteGalleryImage(index)">X</button></span>
             <app-file-upload id="galleryInputFile" (pictureSelected)="onGalleryPictureSelected($event, index, c)" (progress)="onProgressGallery($event, index)"></app-file-upload>
             <p><ngb-progressbar type="info" [value]="progress_gallery[index]" ></ngb-progressbar></p>
             <small class="form-text text-muted">Put gallery picture here.</small>

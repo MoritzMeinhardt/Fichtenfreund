@@ -4,35 +4,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="create blog schema" author="Moritz Meinhardt">
-        <createTable tableName="IMAGES">
-            <column name="ID" type="BIGINT">
-                <constraints nullable="false" />
-            </column>
-            <column name="TITLE" type="VARCHAR(100)"/>
-            <column name="ALT_TEXT" type="VARCHAR(255)"/>
-            <column name="IS_TITLE" type="BOOL">
-                <constraints nullable="false" />
-            </column>
-            <column name="IS_META" type="BOOL">
-                <constraints nullable="false" />
-            </column>
-            <column name="IMAGE" type="BLOB"/>
-            <column name="CREATED_ON" type="datetime">
-                <constraints nullable="false" />
-            </column>
-            <column name="CREATED_BY" type="VARCHAR(255)">
-                <constraints nullable="false" />
-            </column>
-            <column name="UPDATED_ON" type="datetime">
-                <constraints nullable="false" />
-            </column>
-            <column name="UPDATED_BY" type="VARCHAR(255)">
-                <constraints nullable="false" />
-            </column>
-        </createTable>
-        <addPrimaryKey tableName="IMAGES" columnNames="ID" />
-        <createSequence sequenceName="IMAGES_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
-
         <createTable tableName="BLOG_ENTRIES">
             <column name="ID" type="BIGINT">
                 <constraints nullable="false" />
@@ -55,6 +26,42 @@
         </createTable>
         <addPrimaryKey tableName="BLOG_ENTRIES" columnNames="ID" />
         <createSequence sequenceName="BLOG_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
+
+        <createTable tableName="IMAGES">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="TITLE" type="VARCHAR(100)"/>
+            <column name="ALT_TEXT" type="VARCHAR(255)"/>
+            <column name="BLOG_ID" type="BIGINT"/>
+            <column name="IS_TITLE" type="BOOL">
+                <constraints nullable="false" />
+            </column>
+            <column name="IS_META" type="BOOL">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="IMAGE" type="BLOB"/>
+        </createTable>
+        <addPrimaryKey tableName="IMAGES" columnNames="ID" />
+        <createSequence sequenceName="IMAGES_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
+        <addForeignKeyConstraint
+                constraintName="FK_IMAGES_TO_BLOG"
+                baseTableName="IMAGES"
+                baseColumnNames="BLOG_ID"
+                referencedTableName="BLOG_ENTRIES"
+                referencedColumnNames="ID" />
 
         <createTable tableName="PARAGRAPHS">
             <column name="ID" type="BIGINT">

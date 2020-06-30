@@ -1,6 +1,6 @@
 <ngb-carousel *ngIf="images" [interval]="interval">
   <ng-template *ngFor="let image of images; let imgNo = index" ngbSlide>
-    <img src="{{ baseUrl + '/api/file-upload/' + image.url }}" alt="Random first slide" style="max-width: 100%; cursor: pointer" (click)="onImageClicked(imgNo)">
+    <img src="{{ baseUrl + '/api/file-upload/' + image.id }}" alt="Random first slide" style="max-width: 100%; cursor: pointer" (click)="onImageClicked(imgNo)">
   </ng-template>
 </ngb-carousel>
 

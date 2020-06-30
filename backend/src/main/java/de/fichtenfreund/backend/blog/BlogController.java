@@ -33,9 +33,9 @@ public class BlogController {
         return convertToDTO(blogService.create(convertToEntity(blogToBeCreated)));
     }
 
-    @PutMapping
-    public BlogDTO updateBlog(BlogDTO blogToBeUpdated) {
-        return convertToDTO(blogService.update(convertToEntity(blogToBeUpdated)));
+    @PutMapping("/{id}")
+    public BlogDTO updateBlog(@RequestBody() BlogDTO blogToBeUpdated, @PathVariable("id") Long id) {
+        return convertToDTO(blogService.update(convertToEntity(blogToBeUpdated), id));
     }
 
     @DeleteMapping("/{id}")

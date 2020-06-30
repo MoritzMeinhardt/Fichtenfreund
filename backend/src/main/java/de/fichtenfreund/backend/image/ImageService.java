@@ -16,6 +16,10 @@ public class ImageService {
         return imageRepository.save(image).getId();
     }
 
+    public Long update(ImageEntity image) {
+        return imageRepository.save(image).getId();
+    }
+
     public ImageEntity getById(Long id) {
         return imageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }

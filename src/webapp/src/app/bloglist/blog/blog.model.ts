@@ -32,9 +32,9 @@ export interface IParagraph {
 }
 
 export interface IGalleryImage {
-  url: string;
-  caption: string;
-  description: string;
-  date: Date;
+  id: number;
+  title: string;
+  altText: string;
+  createdOn: Date;
 }
 

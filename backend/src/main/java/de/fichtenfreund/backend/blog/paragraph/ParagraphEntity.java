@@ -28,7 +28,7 @@ public class ParagraphEntity extends AbstractEntity {
     private Long blogId;
 
     @JsonProperty("paragraphPic")
-    private String imageId;
+    private Long imageId;
 
     @JsonProperty("paragraphTitle")
     private String title;

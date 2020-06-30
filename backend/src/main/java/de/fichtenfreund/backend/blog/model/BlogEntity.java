@@ -1,10 +1,10 @@
 package de.fichtenfreund.backend.blog.model;
 
 import de.fichtenfreund.backend.Travel.Travel;
-import de.fichtenfreund.backend.blog.GalleryImage.GalleryImage;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.comment.model.CommentEntity;
 import de.fichtenfreund.backend.country.Country;
+import de.fichtenfreund.backend.image.model.ImageEntity;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
@@ -37,8 +37,9 @@ public class BlogEntity extends AbstractEntity {
     @JoinColumn(name = "BLOG_ID")
     private List<CommentEntity> commentEntities;
 
-    @Transient
-    private List<GalleryImage> galleryImages;
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "BLOG_ID")
+    private List<ImageEntity> galleryImages;
 
     private String category;
 

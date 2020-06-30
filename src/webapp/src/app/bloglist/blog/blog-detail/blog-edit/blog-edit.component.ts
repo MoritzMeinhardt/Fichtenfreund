@@ -90,18 +90,18 @@ export class BlogEditComponent implements OnInit {
 
   onPrepopulateGalleryImages(p: any) {
     return new FormGroup({
-        'caption': new FormControl(p.caption),
-        'url': new FormControl(p.url),
-        'description': new FormControl(p.description)
+        'title': new FormControl(p.title),
+        'id': new FormControl(p.id),
+        'altText': new FormControl(p.altText)
       }
     );
   }
 
   onAddGalleryImage() {
     const formGroup = new FormGroup({
-        'caption': new FormControl(null),
-        'url': new FormControl(null),
-        'description': new FormControl(null)
+        'title': new FormControl(null),
+        'id': new FormControl(null),
+        'altText': new FormControl(null)
       }
     );
     (<FormArray>this.editBlogForm.get('galleryImages')).push(formGroup);
@@ -175,7 +175,7 @@ export class BlogEditComponent implements OnInit {
   }
 
   onGalleryPictureSelected(path, index, c: FormGroup) {
-    c.patchValue({'url': path});
+    c.patchValue({'id': path});
   }
 
   onProgress(progress, index: number) {
