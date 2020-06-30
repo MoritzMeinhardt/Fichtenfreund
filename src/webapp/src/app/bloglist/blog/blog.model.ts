@@ -2,7 +2,7 @@ import {IComment} from './blog-detail/comments/comment.model';
 
 export class Blog {
 
-  _id: string;
+  id: string;
   title: string;
   titlePicture: number;
   date: Date;

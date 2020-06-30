@@ -28,7 +28,7 @@ export class CommentFormComponent implements OnInit {
   onSubmit() {
     this.myBlog.comments.push({'name': this.commentForm.get('name').value, 'commentText': this.commentForm.get('commentText').value, 'created': Date.now()});
     this.commentForm.reset();
-    this.blogService.update(this.myBlog._id, this.myBlog).subscribe(
+    this.blogService.update(this.myBlog.id, this.myBlog).subscribe(
       (next) => this.alertService.addAlert(new Alert('Danke für dein Kommentar :)', 'success')),
     (err) => this.alertService.addAlert(new Alert('Hups, das hat nicht funktioniert. ' + err, 'danger'))
     );

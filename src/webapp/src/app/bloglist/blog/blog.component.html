@@ -1,7 +1,7 @@
 <div id="blog">
   <button class="btn btn-danger" *ngIf="false" (click)="onDelete()">D</button>
   <h1><a href="">Norwegen</a></h1>
-  <a [routerLink]="myBlog._id">
+  <a [routerLink]="myBlog.id">
     <div class="imageContainer">
       <img src="{{basePath + '/api/file-upload/' + myBlog.titlePicture }}" alt="">
       <p>{{ myBlog?.titlePicture }}</p>

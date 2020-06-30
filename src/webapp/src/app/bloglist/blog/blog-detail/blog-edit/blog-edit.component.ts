@@ -139,7 +139,7 @@ export class BlogEditComponent implements OnInit {
       this.blogService.add(blog).subscribe(
         (next: Blog) => {
           this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' successful created!', type: 'success'});
-          this.router.navigate(['/blog/' + next._id]);
+          this.router.navigate(['/blog/' + next.id]);
         },
         (err) => {
           this.alertService.addAlert({message: 'Blog '  + this.editBlogForm.get('title').value + ' not updated! ' + err, type: 'danger'});

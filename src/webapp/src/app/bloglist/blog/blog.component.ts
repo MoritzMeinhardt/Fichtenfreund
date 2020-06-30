@@ -22,7 +22,7 @@ export class BlogComponent implements OnInit {
   }
 
   onDelete() {
-    this.blogService.delete(this.myBlog._id).subscribe(
+    this.blogService.delete(this.myBlog.id).subscribe(
       (next) => console.log(next),
       (err) => console.log(err)
     );
