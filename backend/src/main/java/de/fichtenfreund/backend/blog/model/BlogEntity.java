@@ -2,11 +2,11 @@ package de.fichtenfreund.backend.blog.model;
 
 import de.fichtenfreund.backend.Travel.Travel;
 import de.fichtenfreund.backend.blog.GalleryImage.GalleryImage;
-import de.fichtenfreund.backend.blog.paragraph.Paragraph;
+import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.comment.Comment;
 import de.fichtenfreund.backend.country.Country;
 import de.fichtenfreund.backend.model.AbstractEntity;
-import lombok.*;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
@@ -27,10 +27,10 @@ public class BlogEntity extends AbstractEntity {
 
     private String title;
 
-    private String titlePicture;
+    private Long titlePictureId;
 
     @Transient
-    private List<Paragraph> paragraphs;
+    private List<ParagraphEntity> paragraphEntities;
 
     @Transient
     private List<Comment> comments;

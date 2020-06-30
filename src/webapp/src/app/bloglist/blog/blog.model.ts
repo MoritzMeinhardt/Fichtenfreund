@@ -4,7 +4,7 @@ export class Blog {
 
   _id: string;
   title: string;
-  titlePicture: string;
+  titlePicture: number;
   date: Date;
   category: string;
   paragraphs: IParagraph[];
@@ -12,7 +12,7 @@ export class Blog {
   galleryImages: IGalleryImage[];
   updated_on: Date;
 
-  constructor (title: string, titlePicture: string, date: Date, category: string,
+  constructor (title: string, titlePicture: number, date: Date, category: string,
                paragraphs: IParagraph[], comments: IComment[], galleryImages: IGalleryImage[]) {
     this.title = title;
     this.titlePicture = titlePicture;

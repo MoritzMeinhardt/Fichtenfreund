@@ -1,8 +1,9 @@
 package de.fichtenfreund.backend.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import de.fichtenfreund.backend.Travel.Travel;
 import de.fichtenfreund.backend.blog.GalleryImage.GalleryImage;
-import de.fichtenfreund.backend.blog.paragraph.Paragraph;
+import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.comment.Comment;
 import de.fichtenfreund.backend.country.Country;
 import de.fichtenfreund.backend.model.AbstractEntity;
@@ -17,9 +18,10 @@ public class BlogDTO extends AbstractEntity {
 
     private String title;
 
-    private String titlePicture;
+    @JsonProperty("titlePicture")
+    private Long titlePictureId;
 
-    private List<Paragraph> paragraphs;
+    private List<ParagraphEntity> paragraphEntities;
 
     private List<Comment> comments;
 
