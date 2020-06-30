@@ -29,7 +29,8 @@ public class BlogEntity extends AbstractEntity {
 
     private Long titlePictureId;
 
-    @Transient
+    @OneToMany(cascade = {CascadeType.ALL}, orphanRemoval = true)
+    @JoinColumn(name = "BLOG_ID")
     private List<ParagraphEntity> paragraphEntities;
 
     @Transient

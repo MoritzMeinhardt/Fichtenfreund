@@ -60,12 +60,31 @@
             <column name="ID" type="BIGINT">
                 <constraints nullable="false" />
             </column>
+            <column name="BLOG_ID" type="BIGINT"/>
             <column name="TITLE" type="VARCHAR(255)"/>
             <column name="TEXT" type="VARCHAR"/>
             <column name="IMAGE_ID" type="BIGINT"/>
+            <column name="CREATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
         </createTable>
         <addPrimaryKey tableName="PARAGRAPHS" columnNames="ID"/>
         <createSequence sequenceName="PARAGRAPHS_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
+        <addForeignKeyConstraint
+                constraintName="FK_PARAGRAPH_TO_BLOG"
+                baseTableName="PARAGRAPHS"
+                baseColumnNames="BLOG_ID"
+                referencedTableName="BLOG_ENTRIES"
+                referencedColumnNames="ID" />
 
     </changeSet>
 </databaseChangeLog>

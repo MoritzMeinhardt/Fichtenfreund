@@ -21,6 +21,7 @@ public class BlogDTO extends AbstractEntity {
     @JsonProperty("titlePicture")
     private Long titlePictureId;
 
+    @JsonProperty("paragraphs")
     private List<ParagraphEntity> paragraphEntities;
 
     private List<Comment> comments;
