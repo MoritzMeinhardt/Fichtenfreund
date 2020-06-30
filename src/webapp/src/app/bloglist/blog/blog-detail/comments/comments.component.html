@@ -6,7 +6,7 @@
         <img class="mr-3" src="https://image.flaticon.com/icons/svg/15/15858.svg" alt="image of user">
       </div>
       <div class="media-body">
-        <h5 class="mt-0">{{comment?.name}}, {{comment.created | date:'dd.MM.yy'}}</h5>
+        <h5 class="mt-0">{{comment?.name}}, {{comment.createdOn | date:'dd.MM.yy'}}</h5>
         {{comment?.commentText}}
     </div>
     </li>

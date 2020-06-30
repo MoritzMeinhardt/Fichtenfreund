@@ -86,5 +86,36 @@
                 referencedTableName="BLOG_ENTRIES"
                 referencedColumnNames="ID" />
 
+        <createTable tableName="COMMENTS">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="USER" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="EMAIL" type="VARCHAR(100)"/>
+            <column name="COMMENT_TEXT" type="VARCHAR"/>
+            <column name="BLOG_ID" type="BIGINT"/>
+            <column name="CREATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_ON" type="datetime">
+                <constraints nullable="false" />
+            </column>
+            <column name="UPDATED_BY" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="COMMENTS" columnNames="ID"/>
+        <createSequence sequenceName="COMMENTS_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
+        <addForeignKeyConstraint
+                constraintName="FK_COMMENT_TO_BLOG"
+                baseTableName="COMMENTS"
+                baseColumnNames="BLOG_ID"
+                referencedTableName="BLOG_ENTRIES"
+                referencedColumnNames="ID" />
     </changeSet>
 </databaseChangeLog>

@@ -1,10 +1,10 @@
-import {Blog} from "../bloglist/blog/blog.model";
-import {Subject} from "rxjs";
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {CommentModel} from "../bloglist/blog/blog-detail/comments/comment.model";
-import {AuthService} from "./auth.service";
-import {environment} from "../../environments/environment";
+import { Blog } from "../bloglist/blog/blog.model";
+import { Subject } from "rxjs";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { IComment } from "../bloglist/blog/blog-detail/comments/comment.model";
+import { AuthService } from "./auth.service";
+import { environment } from "../../environments/environment";
 
 @Injectable()
 export class BlogService {
@@ -36,15 +36,15 @@ export class BlogService {
   }
 
   update(id: string, blog: Blog) {
-    return this.http.patch(this.urlBase + '/api/blogs/' + id, blog);
+    return this.http.put(this.urlBase + '/api/blogs/' + id, blog);
   }
 
   delete(id: string) {
     return this.http.delete(this.urlBase + '/api/blogs/' + id);
   }
 
-  addComment(id: string, comment: CommentModel) {
-    return this.http.patch('/api/comments/' + id, comment);
+  addComment(blogId: string, comment: IComment) {
+    return this.http.post(`${this.urlBase}/api/blogs/${blogId}/comments/`, comment);
   }
 
 }

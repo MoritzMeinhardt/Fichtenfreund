@@ -1,9 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators} from "@angular/forms";
-import {BlogService} from "../../../../../shared/blog.service";
-import {Blog} from "../../../blog.model";
-import {AlertService} from "../../../../../shared/alert.service";
-import {Alert} from "../../../../../alerts/alert.model";
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+import {BlogService} from '../../../../../shared/blog.service';
+import {Blog} from '../../../blog.model';
+import {AlertService} from '../../../../../shared/alert.service';
+import {Alert} from '../../../../../alerts/alert.model';
+import { IComment } from '../comment.model';
 
 @Component({
   selector: 'app-comment-form',
@@ -26,11 +27,16 @@ export class CommentFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.myBlog.comments.push({'name': this.commentForm.get('name').value, 'commentText': this.commentForm.get('commentText').value, 'created': Date.now()});
+    const comment: IComment = {'name': this.commentForm.get('name').value,
+      'commentText': this.commentForm.get('commentText').value, 'createdOn': Date.now()};
     this.commentForm.reset();
-    this.blogService.update(this.myBlog.id, this.myBlog).subscribe(
-      (next) => this.alertService.addAlert(new Alert('Danke für dein Kommentar :)', 'success')),
-    (err) => this.alertService.addAlert(new Alert('Hups, das hat nicht funktioniert. ' + err, 'danger'))
-    );
+    this.blogService.addComment(this.myBlog.id, comment).subscribe(
+      (next) => {
+        this.alertService.addAlert(new Alert('Danke für dein Kommentar :)', 'success'));
+        this.myBlog.comments.push(comment);
+      },
+          (err) => this.alertService.addAlert(new Alert('Hups, das hat nicht funktioniert. ' + err, 'danger')));
   }
+
+
 }

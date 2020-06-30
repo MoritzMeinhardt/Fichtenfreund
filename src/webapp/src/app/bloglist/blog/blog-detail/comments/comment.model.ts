@@ -1,15 +1,15 @@
 
 
-export class CommentModel implements IComment{
+export class CommentModel implements IComment {
   name: string;
   email: string;
   commentText: string;
-  created: number;
+  createdOn: number;
 
   constructor (name: string, email: string, commentText: string) {
     this.name = name;
     this.commentText = commentText;
-    this.created = Date.now();
+    this.createdOn = Date.now();
   }
 
 }
@@ -17,5 +17,5 @@ export class CommentModel implements IComment{
 export interface IComment {
   name: string;
   commentText: string;
-  created: number;
+  createdOn: number;
 }
