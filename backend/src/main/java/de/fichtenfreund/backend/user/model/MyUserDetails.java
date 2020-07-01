@@ -2,47 +2,35 @@ package de.fichtenfreund.backend.user.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUserDetails implements UserDetails {
+public class MyUserDetails extends org.springframework.security.core.userdetails.User {
 
     private static final long serialVersionUID = 275347623L;
-    private int id;
-    private String username;
-    private String password;
+    private Long id;
     private boolean active;
-    private List<GrantedAuthority> authorities;
 
-    public MyUserDetails(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.active = user.isActive();
+    public MyUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities, boolean active, Long id) {
+        super(username, password, authorities);
+        this.active = active;
+        this.id = id;
+    }
 
-        this.authorities = Arrays.stream(user.getRoles().split(","))
+    public MyUserDetails(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+    }
+
+    public static MyUserDetails from(User user) {
+        List<GrantedAuthority> authorities = Arrays.stream(user.getRoles().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
+        return new MyUserDetails(user.getUsername(), user.getPassword(), authorities, user.isActive(), user.getId());
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -64,11 +52,11 @@ public class MyUserDetails implements UserDetails {
         return active;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }

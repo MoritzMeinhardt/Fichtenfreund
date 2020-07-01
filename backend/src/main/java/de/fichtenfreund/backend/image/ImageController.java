@@ -2,6 +2,7 @@ package de.fichtenfreund.backend.image;
 
 import de.fichtenfreund.backend.image.model.ImageEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,6 +18,7 @@ public class ImageController {
 
     private ImageService imageService;
 
+    @Secured("ADMIN")
     @PostMapping
     public Long create(@RequestParam("file-to-upload") MultipartFile file) {
         return imageService.create(convertToEntity(file));

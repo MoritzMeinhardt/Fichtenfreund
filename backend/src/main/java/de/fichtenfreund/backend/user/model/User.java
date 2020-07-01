@@ -19,7 +19,7 @@ public class User implements Serializable {
             @org.hibernate.annotations.Parameter(name = "sequence", value = "USER_DETAILS_SEQUENCE")
     })
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_DETAILS_SEQUENCE")
-    private int id;
+    private Long id;
 
     private String username;
     private String password;

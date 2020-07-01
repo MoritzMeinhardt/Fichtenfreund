@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -51,11 +52,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/api/users/authenticate").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/blogs/{blogId}/comments").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/users/authenticate").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/console/**").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers(HttpMethod.POST).authenticated()
+                .antMatchers(HttpMethod.DELETE).authenticated()
+                .antMatchers(HttpMethod.PUT).authenticated()
+                .anyRequest().permitAll()
                 .and().exceptionHandling()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

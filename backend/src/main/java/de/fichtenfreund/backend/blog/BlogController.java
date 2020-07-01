@@ -4,6 +4,7 @@ import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,16 +29,19 @@ public class BlogController {
         return convertToDTO(blogService.getById(id));
     }
 
+    @Secured("ADMIN")
     @PostMapping
     public BlogDTO createBlog(@RequestBody() BlogDTO blogToBeCreated) {
         return convertToDTO(blogService.create(convertToEntity(blogToBeCreated)));
     }
 
+    @Secured("ADMIN")
     @PutMapping("/{id}")
     public BlogDTO updateBlog(@RequestBody() BlogDTO blogToBeUpdated, @PathVariable("id") Long id) {
         return convertToDTO(blogService.update(convertToEntity(blogToBeUpdated), id));
     }
 
+    @Secured("ADMIN")
     @DeleteMapping("/{id}")
     public void deleteBlog(@PathVariable("id") Long id) {
         blogService.delete(id);

@@ -16,7 +16,7 @@ public class AuthenticationResponse implements Serializable {
 
     @Setter(AccessLevel.NONE)
     private final String token;
-    private int id;
+    private Long id;
     private String username;
     private List<String> roles;
     private boolean success;
