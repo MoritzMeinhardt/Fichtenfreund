@@ -43,7 +43,7 @@ public class UserController {
 
     private JPAUserDetailsService userDetailsService;
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/authenticate")
     //@CrossOrigin
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -60,6 +60,7 @@ public class UserController {
 
         response.setId(userDetails.getId());
         response.setUsername(userDetails.getUsername());
+        response.setSuccess(true);
         List<String> roles = new ArrayList<>();
         userDetails.getAuthorities().forEach((a) -> roles.add(a.getAuthority()));
         response.setRoles(roles);
