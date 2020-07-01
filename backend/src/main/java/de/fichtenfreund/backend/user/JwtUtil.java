@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JwtUtil {
     // check https://github.com/jwtk/jjwt
 
-    private String SECRET_KEY = "secret";
+    private String SECRET_KEY = "secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
