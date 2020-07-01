@@ -36,11 +36,28 @@ export class BlogService {
   }
 
   update(id: string, blog: Blog) {
-    return this.http.put(this.urlBase + '/api/blogs/' + id, blog);
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+      })
+    };
+    return this.http.put(this.urlBase + '/api/blogs/' + id, blog, httpOptions);
   }
 
   delete(id: string) {
-    return this.http.delete(this.urlBase + '/api/blogs/' + id);
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + token,
+      })
+    };
+
+    return this.http.delete(this.urlBase + '/api/blogs/' + id, httpOptions);
   }
 
   addComment(blogId: string, comment: IComment) {

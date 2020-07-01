@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { AuthService } from "../shared/auth.service";
 
 const URL = environment.urlBase + '/api/file-upload';
 
@@ -14,16 +15,25 @@ export class FileUploadComponent {
   @Output() pictureSelected = new EventEmitter<String>();
   @Output() progress = new EventEmitter<String>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   onFileSelected(event) {
     this.selectedFile = <File> event.target.files[0];
     this.uploadFIle();
   }
   uploadFIle() {
+    const token = this.authService.getToken();
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'reportProgress': 'true',
+        'observe': 'events'
+      })
+    };
     const fd = new FormData();
     fd.append('file-to-upload', this.selectedFile, this.selectedFile.name);
-    this.http.post(URL, fd, { reportProgress: true, observe: 'events' }).subscribe((res: any) => {
+    this.http.post(URL, fd, httpOptions).subscribe((res: any) => {
       if (res instanceof HttpResponse) { // TODO better condition
         this.pictureSelected.next(res.body);
       } else {

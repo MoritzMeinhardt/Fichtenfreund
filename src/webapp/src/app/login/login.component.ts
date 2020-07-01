@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
     this.authService.authenticate(this.loginForm.get('username').value, this.loginForm.get('password').value).subscribe(
       (data: any) => {
         if (data.success) {
-          this.authService.storeUserData(data.token, data.user);
-          this.alertService.addAlert({message: 'Welcome back ' + data.user.username + '!', type: 'success'});
+          this.authService.storeUserData(data.token, data.username);
+          this.alertService.addAlert({message: 'Welcome back ' + data.username + '!', type: 'success'});
         }
       },
       (err) => {

@@ -2,6 +2,7 @@ package de.fichtenfreund.backend.config;
 
 import de.fichtenfreund.backend.filter.JwtRequestFilter;
 import de.fichtenfreund.backend.user.JPAUserDetailsService;
+import de.fichtenfreund.backend.user.UserRole;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -56,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/users/authenticate").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/console/**").permitAll()
-                .antMatchers(HttpMethod.POST).authenticated()
-                .antMatchers(HttpMethod.DELETE).authenticated()
-                .antMatchers(HttpMethod.PUT).authenticated()
+                .antMatchers(HttpMethod.POST).hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and().exceptionHandling()
                 .and().sessionManagement()

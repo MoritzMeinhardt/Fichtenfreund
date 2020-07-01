@@ -2,6 +2,7 @@ package de.fichtenfreund.backend.blog;
 
 import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
+import de.fichtenfreund.backend.user.UserRole;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.annotation.Secured;
@@ -41,7 +42,7 @@ public class BlogController {
         return convertToDTO(blogService.update(convertToEntity(blogToBeUpdated), id));
     }
 
-    @Secured("ADMIN")
+    //@Secured("ADMIN")
     @DeleteMapping("/{id}")
     public void deleteBlog(@PathVariable("id") Long id) {
         blogService.delete(id);
