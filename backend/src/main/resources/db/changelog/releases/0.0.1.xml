@@ -124,5 +124,25 @@
                 baseColumnNames="BLOG_ID"
                 referencedTableName="BLOG_ENTRIES"
                 referencedColumnNames="ID" />
+
+        <createTable tableName="USER_DETAILS">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false" />
+            </column>
+            <column name="USERNAME" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="PASSWORD" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="ACTIVE" type="BOOL">
+                <constraints nullable="false" />
+            </column>
+            <column name="ROLES" type="VARCHAR(100)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="USER_DETAILS" columnNames="ID"/>
+        <createSequence sequenceName="USER_DETAILS_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
     </changeSet>
 </databaseChangeLog>

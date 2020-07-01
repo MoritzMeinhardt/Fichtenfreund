@@ -1,14 +1,89 @@
 package de.fichtenfreund.backend.config;
 
+import de.fichtenfreund.backend.filter.JwtRequestFilter;
+import de.fichtenfreund.backend.user.JPAUserDetailsService;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
-public class WebSecurityConfig {
+@EnableWebSecurity
+@AllArgsConstructor
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private JPAUserDetailsService myUserDetailsService;
+
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
+    CorsConfigurationSource CorsConfiguration;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.cors().disable().csrf().disable()
+                .headers().frameOptions().sameOrigin()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/api/users/login").permitAll()
+                .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/console/**").permitAll()
+                .anyRequest().permitAll()
+                .and().exceptionHandling()
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        //httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+
+
+
+
+
+    /*
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+
+        http.cors().disable().csrf().disable()
+                .authorizeRequests().antMatchers("/api/users/authenticate").permitAll()
+                .anyRequest().authenticated()
+                .and().exceptionHandling()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -18,5 +93,5 @@ public class WebSecurityConfig {
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(userDetails);
-    }
+    } */
 }
