@@ -13,11 +13,23 @@ import java.io.IOException;
 @AllArgsConstructor
 public class ImageController {
 
+    final Long ABOUT_US_IMAGE_ID = 1000L;
+
     private ImageService imageService;
 
     @PostMapping
     public Long create(@RequestParam("file-to-upload") MultipartFile file) {
         return imageService.create(convertToEntity(file));
+    }
+
+    @GetMapping("/title")
+    public byte[] getTitleImage() {
+        return imageService.getTitleImage().getImage();
+    }
+
+    @GetMapping("/aboutUs")
+    public byte[] getAboutUsImage() {
+        return imageService.getById(ABOUT_US_IMAGE_ID).getImage();
     }
 
     @GetMapping("/{id}")

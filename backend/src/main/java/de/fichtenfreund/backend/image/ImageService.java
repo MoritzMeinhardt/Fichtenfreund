@@ -23,4 +23,9 @@ public class ImageService {
     public ImageEntity getById(Long id) {
         return imageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
+
+    public ImageEntity getTitleImage() {
+        return imageRepository.getFirstByIsTitle(true);
+    }
+
 }

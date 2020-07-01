@@ -10,7 +10,7 @@ import {environment} from '../../environments/environment';
 })
 export class HomeComponent implements OnInit {
 
-  defaultImg = environment.urlBase + '/api/file-upload/_MG_8434.jpg';
+  defaultImg = environment.urlBase + '/api/file-upload/title';
   img = this.defaultImg;
   public isLoading = true;
 
