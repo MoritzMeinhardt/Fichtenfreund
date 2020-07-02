@@ -1,0 +1,1 @@
+web: java -jar packages/backend/target/backend-0.0.1-SNAPSHOT.war
