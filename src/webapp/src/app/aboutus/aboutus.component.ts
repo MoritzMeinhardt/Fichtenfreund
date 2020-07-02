@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {environment} from "../../environments/environment";
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-aboutus',
@@ -13,6 +13,5 @@ export class AboutusComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
-
 
 }

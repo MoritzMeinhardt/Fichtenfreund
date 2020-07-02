@@ -12,20 +12,23 @@ export class HomeComponent implements OnInit {
 
   defaultImg = environment.urlBase + '/api/file-upload/title';
   img = this.defaultImg;
-  public isLoading = true;
+  public isLoading = false;
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit() {
-    this.isLoading = true;
     this.blogService.onChangedDetail.subscribe(
       (img: string) => {
+        this.isLoading = true;
         if (!img || img === 'default') {
           this.img = this.defaultImg;
         } else {
           this.img = environment.urlBase + '/api/file-upload/' + img;
         }
-      this.isLoading = false;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.log(error);
       }
     );
   }

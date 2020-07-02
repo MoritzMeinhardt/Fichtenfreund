@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import {Component, OnInit} from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'webapp';
 
-  ngOnInit(): void {
-  }
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {}
 
   jumpToTop() {
     window.scrollTo(0, 0);
