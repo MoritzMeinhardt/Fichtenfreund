@@ -1,1 +1,1 @@
-web: ./mvnw spring-boot:run -f packages/backend
+web: ./mvnw spring-boot:run
