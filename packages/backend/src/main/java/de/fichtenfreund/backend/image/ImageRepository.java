@@ -5,6 +5,4 @@ import org.springframework.data.repository.CrudRepository;
 
 interface ImageRepository extends CrudRepository<ImageEntity, Long> {
 
-    ImageEntity getFirstByIsTitle(boolean isTitle);
-
 }

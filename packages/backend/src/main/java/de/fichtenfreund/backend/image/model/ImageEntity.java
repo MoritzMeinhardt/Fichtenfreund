@@ -31,10 +31,13 @@ public class ImageEntity extends AbstractEntity {
 
     private String altText;
 
-    private boolean isTitle;
+    @Transient
+    private byte[] rawImage;
 
-    private boolean isMeta;
+    private byte[] smallImage;
 
-    private byte[] image;
+    private byte[] mediumImage;
+
+    private byte[] largeImage;
 
 }

@@ -34,12 +34,6 @@
             <column name="TITLE" type="VARCHAR(100)"/>
             <column name="ALT_TEXT" type="VARCHAR(255)"/>
             <column name="BLOG_ID" type="BIGINT"/>
-            <column name="IS_TITLE" type="BOOL">
-                <constraints nullable="false" />
-            </column>
-            <column name="IS_META" type="BOOL">
-                <constraints nullable="false" />
-            </column>
             <column name="CREATED_ON" type="datetime">
                 <constraints nullable="false" />
             </column>
@@ -52,7 +46,9 @@
             <column name="UPDATED_BY" type="VARCHAR(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="IMAGE" type="BLOB"/>
+            <column name="SMALL_IMAGE" type="BLOB"/>
+            <column name="MEDIUM_IMAGE" type="BLOB"/>
+            <column name="LARGE_IMAGE" type="BLOB"/>
         </createTable>
         <addPrimaryKey tableName="IMAGES" columnNames="ID" />
         <createSequence sequenceName="IMAGES_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
