@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlBase: 'http://fichtenfreund.de'
+  urlBase: 'https://fichtenfreund.herokuapp.com'
 };
