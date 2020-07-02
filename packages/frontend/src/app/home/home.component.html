@@ -1,0 +1,6 @@
+<div id="divWideImage">
+  <div class="divWideImageCrop">
+    <app-loading-spinner position="center" *ngIf="isLoading"></app-loading-spinner>
+    <img *ngIf="!isLoading" id="wideImage" [src]="img">
+  </div>
+</div>

@@ -1,0 +1,15 @@
+#wideImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#divWideImage {
+  width: 100%;
+  height: 80vh;
+  overflow: visible;
+}
+
+.divWideImageCrop {
+  overflow: hidden;
+  height: 100vh;
+}

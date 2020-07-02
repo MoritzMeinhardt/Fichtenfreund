@@ -1,0 +1,3 @@
+<div class="fixed alert" *ngFor="let alert of alerts; let index = index">
+  <ngb-alert [type]="alert.type" [dismissible]="true" (close)="onClose(index)">{{alert.message}}</ngb-alert>
+</div>

@@ -1,0 +1,11 @@
+.img-container {
+  overflow: hidden;
+  height: 450px;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .img-container {
+    height: 600px;
+  }
+}

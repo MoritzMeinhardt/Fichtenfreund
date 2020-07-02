@@ -1,0 +1,28 @@
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+h2 {
+ margin-bottom: 20px;
+  font-weight: 100;
+  color: lightgrey;
+}
+
+.insta-container {
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 200px;
+  overflow: hidden;
+}
+
+.fichten-background {
+  background-image: url("http://fichtenfreund.de/api/file-upload/footer.jpg");
+}
+
+a:hover {
+  color: unset;
+  font-weight: bold;
+}
