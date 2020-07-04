@@ -55,17 +55,6 @@ public class BlogService {
     }
 
     private void updateGalleryImagesOfBlogEntry(BlogEntity blogToBeUpdated, BlogEntity existingBlog) {
-        // Update existing images
-        existingBlog.getGalleryImages().forEach(existingGalleryImage ->
-                blogToBeUpdated.getGalleryImages().stream()
-                        .filter(galleryImage -> existingGalleryImage.getId().equals(galleryImage.getId()))
-                        .forEach(galleryImage -> {
-                            if (galleryImage.getTitle() != null) existingGalleryImage.setTitle(galleryImage.getTitle());
-                            if (galleryImage.getImage() != null) existingGalleryImage.setImage(galleryImage.getImage());
-                            if (galleryImage.getAltText() != null) existingGalleryImage.setAltText(galleryImage.getAltText());
-                        })
-        );
-
         // Remove deleted images
         List<ImageEntity> removedGalleryImages = existingBlog.getGalleryImages().stream()
                 .filter(existingGalleryImages -> blogToBeUpdated.getGalleryImages().stream().noneMatch(galleryImages -> existingGalleryImages.getId().equals(galleryImages.getId())))

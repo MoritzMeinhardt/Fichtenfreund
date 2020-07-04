@@ -2,7 +2,7 @@
 
 <ngb-carousel *ngIf="images" [interval]="interval" style="overflow: hidden; height: 700px;">
   <ng-template *ngFor="let image of images; let imgNo = index" ngbSlide>
-    <img src="{{ baseUrl + '/api/file-upload/' + image.id }}" alt="Random first slide" style="max-width: 100%; cursor: pointer" (click)="onImageClicked(imgNo)">
+    <img src="{{ baseUrl + '/api/file-upload/' + image.id + '?size=small'}}" alt="Random first slide" style="max-width: 100%; cursor: pointer" (click)="onImageClicked(imgNo)">
   </ng-template>
 </ngb-carousel>
 
@@ -12,7 +12,7 @@
     <i class="fas fa-chevron-left m-auto"></i>
   </div>
   <p style="color: red"></p>
-  <img  class="gallery-img w-100" src="{{ baseUrl + '/api/file-upload/' + images[index]?.url }}" (click)="onClose()">
+  <img  class="gallery-img w-100" src="{{ baseUrl + '/api/file-upload/' + images[index]?.id + '?size=large'}}" (click)="onClose()">
   <div class="navigation navigation-right d-flex navigation-control hover" style="width: 10%; height: 100%;" (click)="onRight()">
     <i class="fas fa-chevron-right m-auto"></i>
   </div>

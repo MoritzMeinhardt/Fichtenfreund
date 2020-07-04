@@ -10,8 +10,8 @@ import java.io.IOException;
 public class ImageResizer {
 
     public static final int SMALL_WIDTH = 500;
-    public static final int MEDIUM_WIDTH = 1500;
-    public static final int LARGE_WIDTH = 2500;
+    public static final int MEDIUM_WIDTH = 1000;
+    public static final int LARGE_WIDTH = 2000;
 
     public static byte[] toSize(byte[] inputImageAsByteArray, int width) {
         BufferedImage inputImage = createImageFromBytes(inputImageAsByteArray);

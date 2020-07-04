@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
         if (!img || img === 'default') {
           this.img = this.defaultImg;
         } else {
-          this.img = environment.urlBase + '/api/file-upload/' + img;
+          this.img = environment.urlBase + '/api/file-upload/' + img + '?size=large';
         }
         this.isLoading = false;
       },

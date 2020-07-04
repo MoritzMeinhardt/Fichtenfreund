@@ -3,7 +3,7 @@
   <h1><a href="">Norwegen</a></h1>
   <a [routerLink]="myBlog.id">
     <div class="imageContainer">
-      <img src="{{basePath + '/api/file-upload/' + myBlog.titlePicture }}" alt="">
+      <img src="{{basePath + '/api/file-upload/' + myBlog.titlePicture + '?size=medium' }}" alt="">
       <p>{{ myBlog?.titlePicture }}</p>
     </div>
     <div class="pl-2 pr-2">

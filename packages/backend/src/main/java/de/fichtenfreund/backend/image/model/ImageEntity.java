@@ -31,13 +31,12 @@ public class ImageEntity extends AbstractEntity {
 
     private String altText;
 
-    @Transient
-    private byte[] rawImage;
-
     private byte[] smallImage;
 
     private byte[] mediumImage;
 
     private byte[] largeImage;
+
+    private byte[] rawImage;
 
 }

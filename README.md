@@ -12,3 +12,5 @@ create user
 first login button click is register
 
 Server runs with ````sudo su | forever start server.js````
+
+1	mopo	****	TRUE	ROLE_ADMIN

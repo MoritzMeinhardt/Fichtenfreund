@@ -49,6 +49,7 @@
             <column name="SMALL_IMAGE" type="BLOB"/>
             <column name="MEDIUM_IMAGE" type="BLOB"/>
             <column name="LARGE_IMAGE" type="BLOB"/>
+            <column name="RAW_IMAGE" type="BLOB"/>
         </createTable>
         <addPrimaryKey tableName="IMAGES" columnNames="ID" />
         <createSequence sequenceName="IMAGES_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
