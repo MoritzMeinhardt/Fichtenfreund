@@ -143,17 +143,13 @@
         <createSequence sequenceName="USER_DETAILS_SEQUENCE" startValue="1000" incrementBy="1" minValue="1000"/>
     </changeSet>
     
-    <changeSet id="add user" author="Moritz Meinhardt">
+    <changeSet id="add initial user" author="Moritz Meinhardt">
         <insert tableName="USER_DETAILS">
             <column name="ID" valueSequenceNext="USER_DETAILS_SEQUENCE" />
             <column name="USERNAME">mopo</column>
             <column name="PASSWORD">AlohomoraZahl42R</column>
             <column name="ACTIVE">true</column>
             <column name="ROLES">ROLE_ADMIN</column>
-            <column name="CREATED_ON" valueComputed="${now}"/>
-            <column name="CREATED_BY" value="system"/>
-            <column name="UPDATED_ON" valueComputed="${now}"/>
-            <column name="UPDATED_BY" value="system"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
