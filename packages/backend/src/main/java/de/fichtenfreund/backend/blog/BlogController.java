@@ -1,21 +1,13 @@
 package de.fichtenfreund.backend.blog;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.fichtenfreund.backend.blog.migration.MigrationObject;
-import de.fichtenfreund.backend.blog.migration.MigrationParagraph;
 import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
-import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @RestController

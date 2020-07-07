@@ -33,12 +33,16 @@ public class ImageEntity extends AbstractEntity {
 
     private String altText;
 
+    @Lob
     private byte[] smallImage;
 
+    @Lob
     private byte[] mediumImage;
 
+    @Lob
     private byte[] largeImage;
 
+    @Lob
     private byte[] rawImage;
 
 }
