@@ -26,7 +26,7 @@ public class CommentEntity extends AbstractEntity {
     @Column(name = "BLOG_ID")
     private Long blogId;
 
-    @Column(name = "USER")
+    @Column(name = "CREATOR")
     private String name;
 
     private String email;
