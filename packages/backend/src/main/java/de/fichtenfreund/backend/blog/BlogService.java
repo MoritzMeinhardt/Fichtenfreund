@@ -6,6 +6,8 @@ import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.LinkedList;
@@ -27,6 +29,7 @@ public class BlogService {
         return blogRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BlogEntity create(BlogEntity blogToBeCreated) {
         List<Long> galleryImagesIds = blogToBeCreated.getGalleryImages().stream()
                 .map(ImageEntity::getId).collect(Collectors.toList());

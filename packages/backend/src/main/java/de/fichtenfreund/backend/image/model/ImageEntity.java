@@ -1,5 +1,6 @@
 package de.fichtenfreund.backend.image.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +16,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true) // TODO REMOVE
 public class ImageEntity extends AbstractEntity {
 
     @Id

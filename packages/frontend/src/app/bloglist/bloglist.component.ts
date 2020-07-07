@@ -1,6 +1,6 @@
-import {AfterContentInit, AfterViewChecked, Component, OnInit} from '@angular/core';
-import {Blog} from './blog/blog.model';
-import {BlogService} from '../shared/blog.service';
+import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Blog } from './blog/blog.model';
+import { BlogService } from '../shared/blog.service';
 
 @Component({
   selector: 'app-bloglist',
@@ -21,6 +21,7 @@ export class BloglistComponent implements OnInit, AfterContentInit {
     this.blogService.getBlogs().subscribe(
       (blogs: Blog []) => {
         this.bloglist = blogs;
+        this.bloglist.reverse();
       }
     );
   }

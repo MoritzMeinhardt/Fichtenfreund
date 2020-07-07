@@ -1,5 +1,6 @@
 package de.fichtenfreund.backend.comment.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true) // TODO REMOVE
 public class CommentEntity extends AbstractEntity {
 
     @Id
