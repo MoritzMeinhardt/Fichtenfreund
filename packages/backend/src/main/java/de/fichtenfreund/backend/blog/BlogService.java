@@ -54,6 +54,9 @@ public class BlogService {
         BlogEntity existingBlog = getById(id);
         updateGalleryImagesOfBlogEntry(blogToBeUpdated, existingBlog);
         updateParagraphsOfBlogEntry(blogToBeUpdated, existingBlog);
+        existingBlog.setTitle(blogToBeUpdated.getTitle());
+        existingBlog.setTitlePictureId(blogToBeUpdated.getTitlePictureId());
+        existingBlog.setCategory(blogToBeUpdated.getCategory());
         return blogRepository.save(existingBlog);
     }
 
