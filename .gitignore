@@ -6,3 +6,4 @@ uploads/
 !uploads/comment.svg
 packages/backend/src/main/resources/public
 !packages/backend/src/main/resources/public/images
+node
