@@ -4,11 +4,11 @@ import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/blogs")
@@ -20,8 +20,11 @@ public class BlogController {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public List<BlogDTO> getBlogEntries() {
-        return blogService.getAllBlogEntries().stream().map(this::convertToDTO).collect(Collectors.toList());
+    public Page<BlogDTO> getBlogEntries(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        if (page == null || size == null) {
+           return blogService.getAllBlogEntries(Pageable.unpaged()).map(this::convertToDTO);
+        }
+        return blogService.getAllBlogEntries(PageRequest.of(page, size)).map(this::convertToDTO);
     }
 
     @GetMapping("/{id}")
