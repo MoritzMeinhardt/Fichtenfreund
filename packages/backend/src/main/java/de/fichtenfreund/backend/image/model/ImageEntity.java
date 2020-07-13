@@ -1,5 +1,6 @@
 package de.fichtenfreund.backend.image.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.AllArgsConstructor;
@@ -33,15 +34,19 @@ public class ImageEntity extends AbstractEntity {
 
     private String altText;
 
+    @JsonIgnore
     @Lob // use @Type(type = "org.hibernate.type.ImageType") and in database bytea instead of blob
     private byte[] smallImage;
 
+    @JsonIgnore
     @Lob
     private byte[] mediumImage;
 
+    @JsonIgnore
     @Lob
     private byte[] largeImage;
 
+    @JsonIgnore
     @Lob
     private byte[] rawImage;
 
