@@ -33,7 +33,7 @@ public class ImageEntity extends AbstractEntity {
 
     private String altText;
 
-    @Lob
+    @Lob // use @Type(type = "org.hibernate.type.ImageType") and in database bytea instead of blob
     private byte[] smallImage;
 
     @Lob
