@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar packages/backend/target/*.war
+web: java -javaagent:/app/newrelic/newrelic.jar -Dserver.port=$PORT $JAVA_OPTS -jar packages/backend/target/*.war
