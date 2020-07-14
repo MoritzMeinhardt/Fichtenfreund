@@ -32,9 +32,9 @@ public class ImageController {
             case "small":
                 return imageService.getSmallImage(id).getSmallImage();
             case "medium":
-                return imageService.getById(id).getMediumImage();
+                return imageService.getMediumImage(id).getMediumImage();
             case "large":
-                return imageService.getById(id).getLargeImage();
+                return imageService.getLargeImage(id).getLargeImage();
             default:
                 throw new IllegalArgumentException("The size " + selectedSize + " is not allowed. Use small, medium or large.");
         }

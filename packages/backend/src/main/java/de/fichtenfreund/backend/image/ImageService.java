@@ -1,6 +1,8 @@
 package de.fichtenfreund.backend.image;
 
 import de.fichtenfreund.backend.image.model.ImageEntity;
+import de.fichtenfreund.backend.image.model.ImageLargeView;
+import de.fichtenfreund.backend.image.model.ImageMediumView;
 import de.fichtenfreund.backend.image.model.ImageSmallView;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,14 @@ public class ImageService {
     }
 
     public ImageSmallView getSmallImage(Long id){
-        return imageRepository.getById(id);
+        return imageRepository.getSmallById(id);
+    }
+
+    public ImageMediumView getMediumImage(Long id){
+        return imageRepository.getMediumById(id);
+    }
+
+    public ImageLargeView getLargeImage(Long id){
+        return imageRepository.getLargeById(id);
     }
 }

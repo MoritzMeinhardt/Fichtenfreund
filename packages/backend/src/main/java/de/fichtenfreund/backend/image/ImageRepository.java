@@ -5,5 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 
 interface ImageRepository extends CrudRepository<ImageEntity, Long> {
 
-    ImageSmallView getById(Long id);
+    ImageSmallView getSmallById(Long id);
+
+    ImageMediumView getMediumById(Long id);
+
+    ImageLargeView getLargeById(Long id);
 }
