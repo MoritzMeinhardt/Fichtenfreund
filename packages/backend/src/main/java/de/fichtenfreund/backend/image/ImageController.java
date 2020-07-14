@@ -30,7 +30,7 @@ public class ImageController {
 
         switch (selectedSize){
             case "small":
-                return imageService.getById(id).getSmallImage();
+                return imageService.getSmallImage(id).getSmallImage();
             case "medium":
                 return imageService.getById(id).getMediumImage();
             case "large":

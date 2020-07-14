@@ -1,6 +1,7 @@
 package de.fichtenfreund.backend.blog;
 
 import de.fichtenfreund.backend.blog.model.BlogEntity;
+import de.fichtenfreund.backend.blog.model.BlogView;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
@@ -23,6 +24,10 @@ public class BlogService {
 
     public List<BlogEntity> getAllBlogEntries() {
         return blogRepository.findAll();
+    }
+
+    public List<BlogView> getAllBlogEntriesWithSmallPayload() {
+        return blogRepository.findAllProjectedBy();
     }
 
     public BlogEntity getById(Long id) {

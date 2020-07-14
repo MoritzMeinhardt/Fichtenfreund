@@ -2,6 +2,7 @@ package de.fichtenfreund.backend.blog;
 
 import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
+import de.fichtenfreund.backend.blog.model.BlogView;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.annotation.Secured;
@@ -21,7 +22,7 @@ public class BlogController {
 
     @GetMapping
     public List<BlogDTO> getBlogEntries() {
-        return blogService.getAllBlogEntries().stream().map(this::convertToDTO).collect(Collectors.toList());
+        return blogService.getAllBlogEntriesWithSmallPayload().stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -48,6 +49,10 @@ public class BlogController {
     }
 
     private BlogDTO convertToDTO(BlogEntity blogEntity) {
+        return modelMapper.map(blogEntity, BlogDTO.class);
+    }
+
+    private BlogDTO convertToDTO(BlogView blogEntity) {
         return modelMapper.map(blogEntity, BlogDTO.class);
     }
 
