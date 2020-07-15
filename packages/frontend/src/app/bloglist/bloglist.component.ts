@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Blog } from './blog/blog.model';
 import { BlogService } from '../shared/blog.service';
 import { Page } from './blog/page.model';
@@ -10,7 +10,6 @@ import { Page } from './blog/page.model';
 })
 export class BloglistComponent implements OnInit {
 
-  page = 0;
   currentPage: Page;
   bloglist: Blog[];
   numbers: number[];
@@ -32,7 +31,7 @@ export class BloglistComponent implements OnInit {
         this.currentPage = blogPage;
         this.bloglist = this.currentPage.content;
         this.bloglist.reverse();
-        this.numbers = Array(this.currentPage.totalPages).fill(1, 0, this.currentPage.totalPages).map((x,i)=>i);
+        this.numbers = Array(this.currentPage.totalPages).fill(1, 0, this.currentPage.totalPages).map((x, i) => i);
         this.isLoading = false;
       }
     );
