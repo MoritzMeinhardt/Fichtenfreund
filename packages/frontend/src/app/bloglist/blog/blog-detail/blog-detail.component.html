@@ -1,5 +1,5 @@
-<h1><a href="">Norwegen</a></h1>
-<div class="noShadowX">
+<app-loading-spinner position="top" *ngIf="isLoading"></app-loading-spinner>
+<div class="noShadowX" *ngIf="!isLoading">
   <div>
     <!--<h1>{{myBlog?.date | date:'d. MMMM y':'de-DE'}}</h1>-->
     <h3 class="letter-spacing">{{myBlog?.title | uppercase}}</h3>

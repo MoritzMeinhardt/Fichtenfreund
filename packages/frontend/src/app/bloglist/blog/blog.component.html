@@ -1,6 +1,6 @@
-<div id="blog">
+<app-loading-spinner position="top" *ngIf="isLoading"></app-loading-spinner>
+<div id="blog" *ngIf="!isLoading">
   <button class="btn btn-danger" *ngIf="false" (click)="onDelete()">D</button>
-  <h1><a href="">Norwegen</a></h1>
   <a [routerLink]="myBlog.id">
     <div class="imageContainer">
       <img src="{{basePath + '/api/file-upload/' + myBlog.titlePicture + '?size=medium' }}" alt="">

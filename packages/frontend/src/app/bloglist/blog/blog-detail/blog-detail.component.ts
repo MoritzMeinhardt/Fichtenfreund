@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Blog, IGalleryImage } from '../blog.model';
+import { Blog } from '../blog.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BlogService } from '../../../shared/blog.service';
 import { environment } from '../../../../environments/environment';
@@ -38,11 +38,11 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
             (blog: Blog) => {
               this.myBlog = blog;
               this.blogService.onChangedDetail.next(this.myBlog.titlePicture);
+              this.isLoading = false;
             }
           );
         }
       );
-    this.isLoading = false;
     }
   }
 
