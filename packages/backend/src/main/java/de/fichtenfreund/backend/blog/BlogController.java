@@ -5,6 +5,9 @@ import de.fichtenfreund.backend.blog.model.BlogEntity;
 import de.fichtenfreund.backend.blog.model.BlogView;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,8 +24,11 @@ public class BlogController {
     private ModelMapper modelMapper;
 
     @GetMapping
-    public List<BlogDTO> getBlogEntries() {
-        return blogService.getAllBlogEntriesWithSmallPayload().stream().map(this::convertToDTO).collect(Collectors.toList());
+    public Page<BlogDTO> getBlogEntries(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        if (page == null || size == null) {
+           return blogService.getAllBlogEntriesWithSmallPayload(Pageable.unpaged()).map(this::convertToDTO);
+        }
+        return blogService.getAllBlogEntriesWithSmallPayload(PageRequest.of(page, size)).map(this::convertToDTO);
     }
 
     @GetMapping("/{id}")

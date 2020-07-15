@@ -6,6 +6,8 @@ import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +24,12 @@ public class BlogService {
     private BlogRepository blogRepository;
     private ImageService imageService;
 
-    public List<BlogEntity> getAllBlogEntries() {
-        return blogRepository.findAll();
+    public Page<BlogEntity> getAllBlogEntries(Pageable pageRequest) {
+        return blogRepository.findAll(pageRequest);
     }
 
-    public List<BlogView> getAllBlogEntriesWithSmallPayload() {
-        return blogRepository.findAllProjectedBy();
+    public Page<BlogView> getAllBlogEntriesWithSmallPayload(Pageable pageRequest) {
+        return blogRepository.findAllProjectedBy(pageRequest);
     }
 
     public BlogEntity getById(Long id) {
