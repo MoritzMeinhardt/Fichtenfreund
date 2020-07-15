@@ -6,9 +6,11 @@ import {BlogEditComponent} from './bloglist/blog/blog-detail/blog-edit/blog-edit
 import {LoginComponent} from './login/login.component';
 import {OnlyLoggedInUsersGuardGuard} from './shared/only-logged-in-users-guard.guard';
 import {AboutusViewComponent} from './aboutus-view/aboutus-view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/blog', pathMatch: 'full'},
+  {path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: HomePageComponent },
   {path: 'login', component: LoginComponent},
   {path: 'blog', component: BloglistComponent},
   {path: 'blog/new', component: BlogEditComponent, canActivate: [OnlyLoggedInUsersGuardGuard]},

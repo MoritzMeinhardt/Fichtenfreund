@@ -27,6 +27,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AboutusViewComponent } from './aboutus-view/aboutus-view.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -51,7 +52,8 @@ export function tokenGetter() {
     AlertsComponent,
     LoadingSpinnerComponent,
     GalleryComponent,
-    AboutusViewComponent
+    AboutusViewComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
