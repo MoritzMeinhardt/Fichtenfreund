@@ -152,4 +152,11 @@
             <column name="ROLES">ROLE_ADMIN</column>
         </insert>
     </changeSet>
+
+    <changeSet id="set correct createdOn for 1024" author="temp">
+        <sql>
+            UPDATE BLOG_ENTRIES SET CREATED_ON = '2020-07-13 16:50:44.883' WHERE ID = 1024;
+            UPDATE BLOG_ENTRIES SET TITLE = 'Balkan Route - Tag 1 - 3' WHERE ID = 1024;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
