@@ -10,7 +10,7 @@ import java.util.List;
 
 interface BlogRepository extends JpaRepository<BlogEntity, Long> {
 
-    Page<BlogView> findAllProjectedBy(Pageable pageable);
+    Page<BlogView> findAllProjectedByOrderByCreatedOnDesc(Pageable pageable);
 
     BlogView findViewById(Long id);
 }

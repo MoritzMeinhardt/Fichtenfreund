@@ -5,7 +5,6 @@ import de.fichtenfreund.backend.blog.model.BlogView;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
-import de.fichtenfreund.backend.image.model.ImageWithoutPayloadView;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +28,7 @@ public class BlogService {
     }
 
     public Page<BlogView> getAllBlogEntriesWithSmallPayload(Pageable pageRequest) {
-        return blogRepository.findAllProjectedBy(pageRequest);
+        return blogRepository.findAllProjectedByOrderByCreatedOnDesc(pageRequest);
     }
 
     public BlogEntity getById(Long id) {
