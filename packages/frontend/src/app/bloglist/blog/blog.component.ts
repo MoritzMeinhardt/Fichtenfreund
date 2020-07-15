@@ -3,7 +3,6 @@ import { Blog } from './blog.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../../shared/blog.service';
 import { environment } from '../../../environments/environment';
-import { isLoop } from "tslint";
 
 @Component({
   selector: 'app-blog',
