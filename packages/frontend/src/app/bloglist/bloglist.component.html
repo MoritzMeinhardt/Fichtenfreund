@@ -3,31 +3,20 @@
   <app-blog class="mt-4" *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog.id"></app-blog>
 </div>
 
-<!--<div class="row">
-  <div class="col-lg-10 offset-lg-1">
-    <app-blog class="mt-4" *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog.id"></app-blog>
-  </div>
-</div>
 <div class="row">
   <div class="col-lg-10 offset-lg-1">
     <div class="paging">
       <hr>
       <p>
-        <a href=""><</a>
-        <a href="">1</a>
-        <a href="">2</a>
-        <a href="">3</a>
-        <a href="">4</a>
-        <a href="">...</a>
-        <a href="">></a>
+        <span>&lt;</span>
+        <button (click)="onPageClick(i)" *ngFor="let i of numbers; let i = index"
+        class="paging">
+          {{ i + 1 }}
+        </button>
+        <span>&gt;</span>
       </p>
+      <p>Current page: {{currentPage?.number + 1 }}</p>
       <hr>
     </div>
   </div>
-  <ngb-pagination [collectionSize]="120" [(page)]="page" [maxSize]="5" [rotate]="true" [ellipses]="false"
-                  [boundaryLinks]="true"></ngb-pagination>
-
-  <hr>
-
-  <pre>Current page: {{page}}</pre>
-</div>-->
+</div>

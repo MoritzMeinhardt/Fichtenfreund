@@ -1,10 +1,11 @@
 import { Blog } from '../bloglist/blog/blog.model';
 import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IComment } from '../bloglist/blog/blog-detail/comments/comment.model';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
+import { Page } from '../bloglist/blog/page.model';
 
 @Injectable()
 export class BlogService {
@@ -15,8 +16,8 @@ export class BlogService {
   constructor(private http: HttpClient,
               private authService: AuthService) {}
 
-  getBlogs() {
-    return this.http.get(this.urlBase + '/api/blogs');
+  getBlogs(pageNo: number) {
+    return this.http.get(this.urlBase + '/api/blogs', {params: new HttpParams().set('page', '' + pageNo).append('size', '5')});
   }
 
   getBlog(id: string) {

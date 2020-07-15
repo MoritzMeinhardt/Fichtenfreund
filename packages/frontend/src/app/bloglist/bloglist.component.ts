@@ -8,27 +8,38 @@ import { Page } from './blog/page.model';
   templateUrl: './bloglist.component.html',
   styleUrls: ['./bloglist.component.scss']
 })
-export class BloglistComponent implements OnInit, AfterContentInit {
+export class BloglistComponent implements OnInit {
 
-  page = 10;
+  page = 0;
+  currentPage: Page;
   bloglist: Blog[];
+  numbers: number[];
   public isLoading = false;
 
-  constructor(private blogService: BlogService) { }
+  constructor(private blogService: BlogService) {
+  }
 
   ngOnInit() {
+    // this.page = TODO set here page from url
     this.blogService.onChangedDetail.next('default');
+    this.getBlogs(0);
+  }
+
+  getBlogs(pageNo: number) {
     this.isLoading = true;
-    this.blogService.getBlogs().subscribe(
+    this.blogService.getBlogs(pageNo).subscribe(
       (blogPage: Page) => {
-        this.bloglist = blogPage.content;
+        this.currentPage = blogPage;
+        this.bloglist = this.currentPage.content;
         this.bloglist.reverse();
+        this.numbers = Array(this.currentPage.totalPages).fill(1, 0, this.currentPage.totalPages).map((x,i)=>i);
+        this.isLoading = false;
       }
     );
   }
 
-  ngAfterContentInit(): void {
-    this.isLoading = false;
+  onPageClick(pageNo: number) {
+    this.getBlogs(pageNo);
   }
 
 }
