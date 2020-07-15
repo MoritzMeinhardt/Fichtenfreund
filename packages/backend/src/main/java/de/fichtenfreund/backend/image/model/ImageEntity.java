@@ -3,10 +3,7 @@ package de.fichtenfreund.backend.image.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -45,9 +42,5 @@ public class ImageEntity extends AbstractEntity {
     @JsonIgnore
     @Lob
     private byte[] largeImage;
-
-    @JsonIgnore
-    @Lob
-    private byte[] rawImage;
 
 }

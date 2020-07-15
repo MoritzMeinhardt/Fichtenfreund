@@ -5,6 +5,7 @@ import de.fichtenfreund.backend.blog.model.BlogView;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
+import de.fichtenfreund.backend.image.model.ImageWithoutPayloadView;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,22 +37,18 @@ public class BlogService {
         return blogRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
+    public BlogView getViewById(Long id) {
+        return blogRepository.findViewById(id);
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public BlogEntity create(BlogEntity blogToBeCreated) {
         List<Long> galleryImagesIds = blogToBeCreated.getGalleryImages().stream()
                 .map(ImageEntity::getId).collect(Collectors.toList());
         blogToBeCreated.setGalleryImages(List.of());
         BlogEntity existingBlog = blogRepository.save(blogToBeCreated);
-        List<ImageEntity> images = new LinkedList<>();
         galleryImagesIds
-                .forEach(id -> {
-                    ImageEntity img = imageService.getById(id);
-                    img.setBlogId(existingBlog.getId());
-                    imageService.update(img);
-                    images.add(img);
-                });
-
-        existingBlog.setGalleryImages(images);
+                .forEach(id -> imageService.addBlogIdToImage(id, existingBlog.getId()));
         return existingBlog;
     }
 
@@ -79,12 +76,7 @@ public class BlogService {
                 .filter(galleryImage -> existingBlog.getGalleryImages().stream()
                         .filter(galleryImage2 -> galleryImage.getId().equals(galleryImage2.getId())).count() < 1)
                 .collect(Collectors.toList())
-        .forEach(galleryImage -> {
-            ImageEntity img = imageService.getById(galleryImage.getId());
-            img.setBlogId(existingBlog.getId());
-            imageService.update(img);
-            existingBlog.getGalleryImages().add(img);
-        });
+        .forEach(galleryImage -> imageService.addBlogIdToImage(galleryImage.getId(), existingBlog.getId()));
     }
 
     private void updateParagraphsOfBlogEntry(BlogEntity blogToBeUpdated, BlogEntity existingBlog) {

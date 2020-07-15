@@ -11,9 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestController
 @RequestMapping(value = "/api/blogs")
 @AllArgsConstructor
@@ -33,7 +30,7 @@ public class BlogController {
 
     @GetMapping("/{id}")
     public BlogDTO getById(@PathVariable("id") Long id) {
-        return convertToDTO(blogService.getById(id));
+        return convertToDTO(blogService.getViewById(id));
     }
 
     @Secured("ADMIN")

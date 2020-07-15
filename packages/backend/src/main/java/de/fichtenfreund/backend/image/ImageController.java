@@ -20,8 +20,8 @@ public class ImageController {
 
     @Secured("ADMIN")
     @PostMapping
-    public Long create(@RequestParam("file-to-upload") MultipartFile file) {
-        return imageService.create(convertToEntity(file));
+    public Long create(@RequestParam("file-to-upload") MultipartFile file) throws IOException {
+        return imageService.create(convertToEntity(file), file.getBytes());
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
@@ -41,14 +41,9 @@ public class ImageController {
     }
 
     private ImageEntity convertToEntity(MultipartFile file) {
-        try {
-            return ImageEntity.builder()
-                    .title(file.getName())
-                    .altText("placeholder")
-                    .rawImage(file.getBytes())
-                    .build();
-        } catch (IOException e) {
-           throw new RuntimeException(e);
-        }
+        return ImageEntity.builder()
+                .title(file.getName())
+                .altText("placeholder")
+                .build();
     }
 }
