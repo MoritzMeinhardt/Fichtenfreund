@@ -1,7 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { Blog } from './blog/blog.model';
 import { BlogService } from '../shared/blog.service';
-import { Page } from "./blog/page.model";
+import { Page } from './blog/page.model';
 
 @Component({
   selector: 'app-bloglist',
