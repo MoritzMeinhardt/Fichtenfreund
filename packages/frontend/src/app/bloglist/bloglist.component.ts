@@ -30,7 +30,6 @@ export class BloglistComponent implements OnInit {
       (blogPage: Page) => {
         this.currentPage = blogPage;
         this.bloglist = this.currentPage.content;
-        this.bloglist.reverse();
         this.numbers = Array(this.currentPage.totalPages).fill(1, 0, this.currentPage.totalPages).map((x, i) => i);
         this.isLoading = false;
       }
