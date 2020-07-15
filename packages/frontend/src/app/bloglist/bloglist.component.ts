@@ -1,6 +1,7 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { Blog } from './blog/blog.model';
 import { BlogService } from '../shared/blog.service';
+import { Page } from "./blog/page.model";
 
 @Component({
   selector: 'app-bloglist',
@@ -19,8 +20,8 @@ export class BloglistComponent implements OnInit, AfterContentInit {
     this.blogService.onChangedDetail.next('default');
     this.isLoading = true;
     this.blogService.getBlogs().subscribe(
-      (blogs: Blog []) => {
-        this.bloglist = blogs;
+      (blogPage: Page) => {
+        this.bloglist = blogPage.content;
         this.bloglist.reverse();
       }
     );
