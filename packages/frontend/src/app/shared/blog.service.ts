@@ -16,8 +16,8 @@ export class BlogService {
   constructor(private http: HttpClient,
               private authService: AuthService) {}
 
-  getBlogs(pageNo: number) {
-    return this.http.get(this.urlBase + '/api/blogs', {params: new HttpParams().set('page', '' + pageNo).append('size', '5')});
+  getBlogs(pageNo: number, size: number) {
+    return this.http.get(this.urlBase + '/api/blogs', {params: new HttpParams().set('page', '' + pageNo).append('size', '' + size)});
   }
 
   getBlog(id: string) {

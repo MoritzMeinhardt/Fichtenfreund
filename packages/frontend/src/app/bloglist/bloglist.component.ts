@@ -26,7 +26,7 @@ export class BloglistComponent implements OnInit {
 
   getBlogs(pageNo: number) {
     this.isLoading = true;
-    this.blogService.getBlogs(pageNo).subscribe(
+    this.blogService.getBlogs(pageNo, 5).subscribe(
       (blogPage: Page) => {
         this.currentPage = blogPage;
         this.bloglist = this.currentPage.content;
