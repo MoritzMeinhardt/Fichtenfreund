@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.sql.SQLException;
 
 @Service
 @AllArgsConstructor
@@ -25,7 +26,11 @@ public class ImageService {
         image.setLargeImage(ImageResizer.toSize(rawImage, ImageResizer.LARGE_WIDTH));
 
         Long savedImageId = imageRepository.save(image).getId();
-        imageRepository.saveRawImage(savedImageId, rawImage);
+        try {
+            imageRepository.saveRawImage(savedImageId, new javax.sql.rowset.serial.SerialBlob(rawImage));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return savedImageId;
     }
 
