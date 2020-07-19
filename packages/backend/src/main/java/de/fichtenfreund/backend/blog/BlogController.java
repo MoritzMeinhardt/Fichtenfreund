@@ -3,6 +3,7 @@ package de.fichtenfreund.backend.blog;
 import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
 import de.fichtenfreund.backend.blog.model.BlogView;
+import de.fichtenfreund.backend.blog.model.BlogViewWithoutImages;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -61,6 +62,14 @@ public class BlogController {
     }
 
     private BlogDTO convertToDTO(BlogView blogEntity) {
+        BlogDTO dto = modelMapper.map(blogEntity, BlogDTO.class);
+        List<ParagraphEntity> sortedParagraphs = dto.getParagraphEntities().stream()
+                .sorted(Comparator.comparingLong(ParagraphEntity::getId)).collect(Collectors.toList());
+        dto.setParagraphEntities(sortedParagraphs);
+        return dto;
+    }
+
+    private BlogDTO convertToDTO(BlogViewWithoutImages blogEntity) {
         BlogDTO dto = modelMapper.map(blogEntity, BlogDTO.class);
         List<ParagraphEntity> sortedParagraphs = dto.getParagraphEntities().stream()
                 .sorted(Comparator.comparingLong(ParagraphEntity::getId)).collect(Collectors.toList());
