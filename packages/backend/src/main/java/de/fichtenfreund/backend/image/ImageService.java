@@ -3,6 +3,8 @@ package de.fichtenfreund.backend.image;
 import de.fichtenfreund.backend.image.model.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -12,6 +14,7 @@ public class ImageService {
 
     private ImageRepository imageRepository;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Long create(ImageEntity image, byte[] rawImage) {
 
         // create small image

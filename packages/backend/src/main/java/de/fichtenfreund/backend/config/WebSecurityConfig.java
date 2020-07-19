@@ -66,37 +66,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-
-
-
-
-
-    /*
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http.cors().disable().csrf().disable()
-                .authorizeRequests().antMatchers("/api/users/authenticate").permitAll()
-                .anyRequest().authenticated()
-                .and().exceptionHandling()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("1234")
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(userDetails);
-    } */
 }
