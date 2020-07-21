@@ -2,6 +2,8 @@ package de.fichtenfreund.backend.image;
 
 import de.fichtenfreund.backend.image.model.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,8 +59,8 @@ public class ImageService {
         imageRepository.addBlogIdToImage(id, blogId);
     }
 
-    public void merge() {
-        Iterable<ImageEntity> images = imageRepository.findAll();
+    public Page<ImageEntity> merge(PageRequest pageRequest) {
+        Page<ImageEntity> images = imageRepository.findAll(pageRequest);
         images.forEach(image -> {
             image.setSmallImage2(image.getSmallImage());
             image.setMediumImage2(image.getMediumImage());
@@ -66,5 +68,6 @@ public class ImageService {
             image.setRawImage2(image.getRawImage());
             imageRepository.save(image);
         });
+        return images;
     }
 }

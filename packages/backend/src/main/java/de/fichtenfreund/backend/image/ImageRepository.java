@@ -4,12 +4,13 @@ import de.fichtenfreund.backend.image.model.*;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import javax.persistence.Lob;
 import java.sql.Blob;
 
-interface ImageRepository extends CrudRepository<ImageEntity, Long> {
+interface ImageRepository extends PagingAndSortingRepository<ImageEntity, Long> {
 
     ImageSmallView getSmallById(Long id);
 

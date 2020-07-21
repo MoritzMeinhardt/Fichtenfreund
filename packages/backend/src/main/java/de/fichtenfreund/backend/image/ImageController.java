@@ -2,6 +2,9 @@ package de.fichtenfreund.backend.image;
 
 import de.fichtenfreund.backend.image.model.ImageEntity;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -42,9 +45,8 @@ public class ImageController {
     }
 
     @GetMapping("merge")
-    public ResponseEntity mergeImageToBytea() {
-        imageService.merge();
-        return ResponseEntity.ok("merged");
+    public Page<ImageEntity> mergeImageToBytea(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
+        return imageService.merge(PageRequest.of(page, 10));
     }
 
     private ImageEntity convertToEntity(MultipartFile file) {
