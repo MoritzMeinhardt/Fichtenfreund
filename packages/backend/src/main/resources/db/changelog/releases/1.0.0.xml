@@ -1,0 +1,29 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create image columns with type image (bytea)" author="Moritz Meinhardt">
+        <addColumn tableName="IMAGES">
+            <column name="SMALL_IMAGE2" type="bytea"/>
+            <column name="MEDIUM_IMAGE2" type="bytea"/>
+            <column name="LARGE_IMAGE2" type="bytea"/>
+            <column name="RAW_IMAGE2" type="bytea"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="remove previous oid columns" author="Moritz Meinhardt">
+        <dropColumn tableName="IMAGES" columnName="SMALL_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="MEDIUM_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="LARGE_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="RAW_IMAGE"/>
+    </changeSet>
+
+    <changeSet id="rename new bytea columns to previous oid column names" author="Moritz Meinhardt">
+        <renameColumn tableName="IMAGES" oldColumnName="SMALL_IMAGE2" newColumnName="SMALL_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="MEDIUM_IMAGE2" newColumnName="MEDIUM_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="LARGE_IMAGE2" newColumnName="LARGE_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="RAW_IMAGE2" newColumnName="RAW_IMAGE"/>
+    </changeSet>
+
+</databaseChangeLog>

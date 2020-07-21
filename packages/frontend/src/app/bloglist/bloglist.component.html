@@ -1,22 +1,22 @@
 <app-loading-spinner position="top" *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="!isLoading">
   <app-blog class="mt-4" *ngFor="let blog of bloglist; let i = index" [myBlog]="blog" [id]="blog.id"></app-blog>
-</div>
-
-<div class="row">
-  <div class="col-lg-10 offset-lg-1">
-    <div class="paging">
-      <hr>
-      <p>
-        <span>&lt;</span>
-        <button (click)="onPageClick(i)" *ngFor="let i of numbers; let i = index"
-        class="paging">
-          {{ i + 1 }}
-        </button>
-        <span>&gt;</span>
-      </p>
-      <p>Current page: {{currentPage?.number + 1 }}</p>
-      <hr>
+  <div class="row">
+    <div class="col-lg-10 offset-lg-1">
+      <div class="paging">
+        <hr>
+        <p>
+          <span>&lt;</span>
+          <button (click)="onPageClick(i)" *ngFor="let i of numbers; let i = index"
+          class="paging">
+            {{ i + 1 }}
+          </button>
+          <span>&gt;</span>
+        </p>
+        <p>Current page: {{currentPage?.number + 1 }}</p>
+        <hr>
+      </div>
     </div>
   </div>
 </div>
+

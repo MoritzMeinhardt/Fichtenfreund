@@ -2,6 +2,7 @@ package de.fichtenfreund.backend.blog;
 
 import de.fichtenfreund.backend.blog.model.BlogEntity;
 import de.fichtenfreund.backend.blog.model.BlogView;
+import de.fichtenfreund.backend.blog.model.BlogViewWithoutImages;
 import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import de.fichtenfreund.backend.image.ImageService;
 import de.fichtenfreund.backend.image.model.ImageEntity;
@@ -27,7 +28,7 @@ public class BlogService {
         return blogRepository.findAll(pageRequest);
     }
 
-    public Page<BlogView> getAllBlogEntriesWithSmallPayload(Pageable pageRequest) {
+    public Page<BlogViewWithoutImages> getAllBlogEntriesWithSmallPayload(Pageable pageRequest) {
         return blogRepository.findAllProjectedByOrderByCreatedOnDesc(pageRequest);
     }
 

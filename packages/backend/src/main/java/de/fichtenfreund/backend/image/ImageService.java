@@ -2,9 +2,13 @@ package de.fichtenfreund.backend.image;
 
 import de.fichtenfreund.backend.image.model.*;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
+import java.sql.SQLException;
 
 @Service
 @AllArgsConstructor
@@ -12,6 +16,7 @@ public class ImageService {
 
     private ImageRepository imageRepository;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public Long create(ImageEntity image, byte[] rawImage) {
 
         // create small image
@@ -22,7 +27,11 @@ public class ImageService {
         image.setLargeImage(ImageResizer.toSize(rawImage, ImageResizer.LARGE_WIDTH));
 
         Long savedImageId = imageRepository.save(image).getId();
-        imageRepository.saveRawImage(savedImageId, rawImage);
+         try {
+            imageRepository.saveRawImage(savedImageId, new javax.sql.rowset.serial.SerialBlob(rawImage));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return savedImageId;
     }
 
@@ -45,7 +54,7 @@ public class ImageService {
     public ImageLargeView getLargeImage(Long id){
         return imageRepository.getLargeById(id);
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addBlogIdToImage(Long id, Long blogId) {
         imageRepository.addBlogIdToImage(id, blogId);
     }

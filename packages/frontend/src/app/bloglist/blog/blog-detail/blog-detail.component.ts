@@ -25,9 +25,8 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
               private authService: AuthService) { }
 
   ngOnInit() {
-    this.isLoading = true;
     if (this.myBlog) {
-
+      this.isLoading = false;
     } else {
       this.isAuthenticated = this.authService.isAuthenticated();
 

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -32,15 +33,14 @@ public class ImageEntity extends AbstractEntity {
     private String altText;
 
     @JsonIgnore
-    @Lob // use @Type(type = "org.hibernate.type.ImageType") and in database bytea instead of blob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] smallImage;
 
     @JsonIgnore
-    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] mediumImage;
 
     @JsonIgnore
-    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] largeImage;
-
 }

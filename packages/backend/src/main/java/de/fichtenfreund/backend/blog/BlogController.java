@@ -3,6 +3,8 @@ package de.fichtenfreund.backend.blog;
 import de.fichtenfreund.backend.blog.model.BlogDTO;
 import de.fichtenfreund.backend.blog.model.BlogEntity;
 import de.fichtenfreund.backend.blog.model.BlogView;
+import de.fichtenfreund.backend.blog.model.BlogViewWithoutImages;
+import de.fichtenfreund.backend.blog.paragraph.ParagraphEntity;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -10,6 +12,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/blogs")
@@ -56,7 +62,19 @@ public class BlogController {
     }
 
     private BlogDTO convertToDTO(BlogView blogEntity) {
-        return modelMapper.map(blogEntity, BlogDTO.class);
+        BlogDTO dto = modelMapper.map(blogEntity, BlogDTO.class);
+        List<ParagraphEntity> sortedParagraphs = dto.getParagraphEntities().stream()
+                .sorted(Comparator.comparingLong(ParagraphEntity::getId)).collect(Collectors.toList());
+        dto.setParagraphEntities(sortedParagraphs);
+        return dto;
+    }
+
+    private BlogDTO convertToDTO(BlogViewWithoutImages blogEntity) {
+        BlogDTO dto = modelMapper.map(blogEntity, BlogDTO.class);
+        List<ParagraphEntity> sortedParagraphs = dto.getParagraphEntities().stream()
+                .sorted(Comparator.comparingLong(ParagraphEntity::getId)).collect(Collectors.toList());
+        dto.setParagraphEntities(sortedParagraphs);
+        return dto;
     }
 
     private BlogEntity convertToEntity(BlogDTO blogDTO) {

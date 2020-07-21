@@ -7,7 +7,7 @@ import de.fichtenfreund.backend.image.model.ImageWithoutPayloadView;
 import java.util.Date;
 import java.util.List;
 
-public interface BlogView {
+public interface BlogViewWithoutImages {
 
     Long getId();
 
@@ -18,8 +18,6 @@ public interface BlogView {
     List<ParagraphEntity> getParagraphEntities();
 
     List<CommentEntity> getCommentEntities();
-
-    List<ImageWithoutPayloadView> getGalleryImages();
 
     String getCategory();
 
