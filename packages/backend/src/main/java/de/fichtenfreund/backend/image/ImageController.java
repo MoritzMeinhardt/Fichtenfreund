@@ -3,6 +3,7 @@ package de.fichtenfreund.backend.image;
 import de.fichtenfreund.backend.image.model.ImageEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,6 +39,12 @@ public class ImageController {
             default:
                 throw new IllegalArgumentException("The size " + selectedSize + " is not allowed. Use small, medium or large.");
         }
+    }
+
+    @GetMapping("merge")
+    public ResponseEntity mergeImageToBytea() {
+        imageService.merge();
+        return ResponseEntity.ok("merged");
     }
 
     private ImageEntity convertToEntity(MultipartFile file) {

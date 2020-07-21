@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.sql.SQLException;
 
 @Service
@@ -26,7 +25,7 @@ public class ImageService {
         image.setLargeImage(ImageResizer.toSize(rawImage, ImageResizer.LARGE_WIDTH));
 
         Long savedImageId = imageRepository.save(image).getId();
-        try {
+         try {
             imageRepository.saveRawImage(savedImageId, new javax.sql.rowset.serial.SerialBlob(rawImage));
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -53,8 +52,19 @@ public class ImageService {
     public ImageLargeView getLargeImage(Long id){
         return imageRepository.getLargeById(id);
     }
-
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addBlogIdToImage(Long id, Long blogId) {
         imageRepository.addBlogIdToImage(id, blogId);
+    }
+
+    public void merge() {
+        Iterable<ImageEntity> images = imageRepository.findAll();
+        images.forEach(image -> {
+            image.setSmallImage2(image.getSmallImage());
+            image.setMediumImage2(image.getMediumImage());
+            image.setLargeImage2(image.getLargeImage());
+            image.setRawImage2(image.getRawImage());
+            imageRepository.save(image);
+        });
     }
 }

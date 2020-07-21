@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create image columns with type image (bytea)" author="Moritz Meinhardt">
+        <addColumn tableName="IMAGES">
+            <column name="SMALL_IMAGE2" type="bytea"/>
+            <column name="MEDIUM_IMAGE2" type="bytea"/>
+            <column name="LARGE_IMAGE2" type="bytea"/>
+            <column name="RAW_IMAGE2" type="bytea"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

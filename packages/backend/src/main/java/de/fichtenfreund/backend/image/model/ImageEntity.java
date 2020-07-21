@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import de.fichtenfreund.backend.model.AbstractEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -43,4 +44,23 @@ public class ImageEntity extends AbstractEntity {
     @Lob
     private byte[] largeImage;
 
+    @JsonIgnore
+    @Lob
+    private byte[] rawImage;
+
+    @JsonIgnore
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] smallImage2;
+
+    @JsonIgnore
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] mediumImage2;
+
+    @JsonIgnore
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] largeImage2;
+
+    @JsonIgnore
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] rawImage2;
 }
