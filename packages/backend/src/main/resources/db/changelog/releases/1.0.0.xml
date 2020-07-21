@@ -12,4 +12,18 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="remove previous oid columns" author="Moritz Meinhardt">
+        <dropColumn tableName="IMAGES" columnName="SMALL_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="MEDIUM_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="LARGE_IMAGE"/>
+        <dropColumn tableName="IMAGES" columnName="RAW_IMAGE"/>
+    </changeSet>
+
+    <changeSet id="rename new bytea columns to previous oid column names" author="Moritz Meinhardt">
+        <renameColumn tableName="IMAGES" oldColumnName="SMALL_IMAGE2" newColumnName="SMALL_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="MEDIUM_IMAGE2" newColumnName="MEDIUM_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="LARGE_IMAGE2" newColumnName="LARGE_IMAGE"/>
+        <renameColumn tableName="IMAGES" oldColumnName="RAW_IMAGE2" newColumnName="RAW_IMAGE"/>
+    </changeSet>
+
 </databaseChangeLog>

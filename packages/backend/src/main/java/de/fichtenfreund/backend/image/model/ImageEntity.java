@@ -34,16 +34,13 @@ public class ImageEntity extends AbstractEntity {
 
     @JsonIgnore
     @Type(type = "org.hibernate.type.ImageType")
-    @Column(name = "SMALL_IMAGE2")
     private byte[] smallImage;
 
     @JsonIgnore
     @Type(type = "org.hibernate.type.ImageType")
-    @Column(name = "MEDIUM_IMAGE2")
     private byte[] mediumImage;
 
     @JsonIgnore
     @Type(type = "org.hibernate.type.ImageType")
-    @Column(name = "LARGE_IMAGE2")
     private byte[] largeImage;
 }
