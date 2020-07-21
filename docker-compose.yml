@@ -11,7 +11,8 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_USER=sa
-      - POSTGRES_DB=fichtenfreund
+      - POSTGRES_DB=fichtenfreund-local
+      - POSTGRES_PASSWORD=abcfgh28374
     restart: unless-stopped
 volumes:
   postgres-data:
