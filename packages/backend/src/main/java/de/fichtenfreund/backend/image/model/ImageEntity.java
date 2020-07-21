@@ -33,34 +33,17 @@ public class ImageEntity extends AbstractEntity {
     private String altText;
 
     @JsonIgnore
-    @Lob // use @Type(type = "org.hibernate.type.ImageType") and in database bytea instead of blob
+    @Type(type = "org.hibernate.type.ImageType")
+    @Column(name = "SMALL_IMAGE2")
     private byte[] smallImage;
 
     @JsonIgnore
-    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
+    @Column(name = "MEDIUM_IMAGE2")
     private byte[] mediumImage;
 
     @JsonIgnore
-    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
+    @Column(name = "LARGE_IMAGE2")
     private byte[] largeImage;
-
-    @JsonIgnore
-    @Lob
-    private byte[] rawImage;
-
-    @JsonIgnore
-    @Type(type = "org.hibernate.type.ImageType")
-    private byte[] smallImage2;
-
-    @JsonIgnore
-    @Type(type = "org.hibernate.type.ImageType")
-    private byte[] mediumImage2;
-
-    @JsonIgnore
-    @Type(type = "org.hibernate.type.ImageType")
-    private byte[] largeImage2;
-
-    @JsonIgnore
-    @Type(type = "org.hibernate.type.ImageType")
-    private byte[] rawImage2;
 }

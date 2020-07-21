@@ -58,16 +58,4 @@ public class ImageService {
     public void addBlogIdToImage(Long id, Long blogId) {
         imageRepository.addBlogIdToImage(id, blogId);
     }
-
-    public Page<ImageEntity> merge(PageRequest pageRequest) {
-        Page<ImageEntity> images = imageRepository.findAll(pageRequest);
-        images.forEach(image -> {
-            image.setSmallImage2(image.getSmallImage());
-            image.setMediumImage2(image.getMediumImage());
-            image.setLargeImage2(image.getLargeImage());
-            image.setRawImage2(image.getRawImage());
-            imageRepository.save(image);
-        });
-        return images;
-    }
 }

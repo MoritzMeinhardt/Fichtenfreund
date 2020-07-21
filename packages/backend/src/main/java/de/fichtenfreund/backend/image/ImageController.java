@@ -45,11 +45,6 @@ public class ImageController {
         }
     }
 
-    @GetMapping("merge")
-    public Page<ImageEntity> mergeImageToBytea(@RequestParam(required = false) Integer page, @RequestParam(required = false) Integer size) {
-        return imageService.merge(PageRequest.of(page, size, Sort.by("id")));
-    }
-
     private ImageEntity convertToEntity(MultipartFile file) {
         return ImageEntity.builder()
                 .title(file.getName())
