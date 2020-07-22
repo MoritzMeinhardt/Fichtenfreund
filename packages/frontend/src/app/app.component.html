@@ -4,7 +4,7 @@
 </div>
 <app-navbar></app-navbar>
 
-<main class="row no-gutters margin-to-nav">
+<main class="row no-gutters" [ngClass]="{'margin-to-nav-home': currentRoute == '/home', 'mt-5': currentRoute != '/home'}">
   <div class="col mx-auto p-0">
     <router-outlet (activate)="jumpToTop()"></router-outlet>
   </div>

@@ -19,7 +19,6 @@ body {
   height: 50vw;
   overflow: hidden;
   margin: auto;
-  box-shadow: 0px 5px 10px grey;
 }
 
 h3{
@@ -190,3 +189,6 @@ input.ng-invalid.ng-touched {
   }
 }
 
+.text-italic {
+  font-style: italic;
+}
