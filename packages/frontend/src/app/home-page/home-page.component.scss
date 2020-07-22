@@ -20,6 +20,11 @@
   margin-left: 6px;
 }
 
+::ng-deep .picsum-img-wrapper {
+  width: 70vw;
+  height: 70vh;
+}
+
 .jumbotron {
   background-color: #ebe6e0;
   padding: 1rem 2rem;
@@ -36,6 +41,13 @@
   height: auto;
 }
 
+.carousel-image {
+  cursor: pointer;
+  width: 100%;
+  height: auto;
+  opacity: 0.9;
+}
+
 @media (max-width: 700px) {
   .katha-moritz-container {
     height: 50vw;
@@ -45,7 +57,19 @@
   .katha-moritz-container > img {
    height: 100%;
    width: auto;
- }
+  }
+
+  ::ng-deep .picsum-img-wrapper {
+    height: 90vw;
+    width: 90vw;
+  }
+
+  .carousel-image {
+    cursor: pointer;
+    width: auto;
+    height: 100%;
+    opacity: 0.9;
+  }
 }
 
 .rotate {
