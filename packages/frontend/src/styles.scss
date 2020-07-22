@@ -39,7 +39,7 @@ h2 {
 }
 
 h1{
-  color: #c9c9c9;
+  color: #232323;
   font-size: 15px;
   text-align: center;
   margin-bottom: 20px;
@@ -143,5 +143,37 @@ input.ng-invalid.ng-touched {
     height: 65vH;
     width: 100%;
     overflow: hidden;
+  }
+}
+
+.amatic-sc {
+  font-family: Amatic SC, sans-serif;
+}
+
+.montserrat {
+  font-family: Montserrat, sans-serif;
+}
+
+.flood {
+  font-family: flood-std, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-20 {
+  font-size: 20px;
+}
+
+.text-30 {
+  font-size: 30px;
+}
+
+.text-40 {
+  font-size: 40px;
+}
+
+@media (min-width: 700px) {
+  .mw-lg-35 {
+    max-width: 35%;
   }
 }
