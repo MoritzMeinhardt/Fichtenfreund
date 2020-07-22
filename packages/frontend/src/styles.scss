@@ -65,7 +65,7 @@ span.spanright {
 }
 
 p {
-  text-align: justify;
+  text-align: left;
   letter-spacing: 1px;
 }
 
@@ -172,8 +172,21 @@ input.ng-invalid.ng-touched {
   font-size: 40px;
 }
 
+.text-xl-responsive {
+  font-size: 20px;
+}
+
 @media (min-width: 700px) {
-  .mw-lg-35 {
-    max-width: 35%;
+  .mw-lg-45 {
+    max-width: 52%;
+  }
+
+  .pl-6 {
+    padding-left: 4rem !important;
+  }
+
+  .text-xl-responsive {
+    font-size: 40px;
   }
 }
+
