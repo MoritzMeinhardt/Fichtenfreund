@@ -1,0 +1,9 @@
+.margin-to-nav {
+  margin-top: 35vH;
+}
+
+@media (max-width: 700px) {
+  .margin-to-nav {
+    margin-top: 25vH;
+  }
+}

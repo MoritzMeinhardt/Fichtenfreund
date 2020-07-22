@@ -1,8 +1,12 @@
-<app-header></app-header>
+
+<div style="min-height: 100vH;">
+  <app-header></app-header>
+  <app-alerts></app-alerts>
+</div>
 <app-navbar></app-navbar>
-<app-alerts></app-alerts>
-<main class="row no-gutters ">
-  <div class="col mt-4 mx-auto p-0">
+
+<main class="row no-gutters margin-to-nav">
+  <div class="col mx-auto p-0">
     <router-outlet (activate)="jumpToTop()"></router-outlet>
   </div>
 </main>

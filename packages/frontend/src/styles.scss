@@ -129,3 +129,19 @@ input.ng-invalid.ng-touched {
   height: 100%;
   object-fit: cover;
 }
+
+.mt-6 {
+  margin-top: 5rem !important;
+}
+
+.responsive-image {
+
+}
+
+@media (max-width: 700px) {
+  .responsive-image  {
+    height: 65vH;
+    width: 100%;
+    overflow: hidden;
+  }
+}

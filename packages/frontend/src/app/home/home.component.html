@@ -1,2 +1,4 @@
 <app-loading-spinner position="center" *ngIf="isLoading"></app-loading-spinner>
-<img *ngIf="!isLoading" id="wideImage" [src]="img">
+<div class="responsive-image">
+  <img *ngIf="!isLoading" id="wideImage" [src]="img">
+</div>
