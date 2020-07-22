@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Blog } from '../blog.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { BlogService } from '../../../shared/blog.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../../../shared/auth.service';
   styleUrls: ['./blog-detail.component.scss'],
   providers: []
 })
-export class BlogDetailComponent implements OnInit, OnDestroy {
+export class BlogDetailComponent implements OnInit {
 
   @Input() myBlog: Blog;
   private id: string;
@@ -36,16 +36,11 @@ export class BlogDetailComponent implements OnInit, OnDestroy {
           this.blogService.getBlog(this.id).subscribe(
             (blog: Blog) => {
               this.myBlog = blog;
-              this.blogService.onChangedDetail.next(this.myBlog.titlePicture);
               this.isLoading = false;
             }
           );
         }
       );
     }
-  }
-
-  ngOnDestroy() {
-    this.blogService.onChangedDetail.next();
   }
 }

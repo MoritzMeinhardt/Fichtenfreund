@@ -3,4 +3,4 @@
     <img src="{{ pathToLogo }}" class="img-fluid w-100 logo">
   </div>
 </div>
-<app-home></app-home>
+<app-home *ngIf="currentRoute == '/home'"></app-home>

@@ -20,7 +20,6 @@ export class BloglistComponent implements OnInit {
 
   ngOnInit() {
     // this.page = TODO set here page from url
-    this.blogService.onChangedDetail.next('default');
     this.getBlogs(0);
   }
 

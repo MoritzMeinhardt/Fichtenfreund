@@ -1,4 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import { NavigationEnd, Router } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -12,11 +13,18 @@ export class NavbarComponent implements OnInit {
   show = true;
   private lastScrollPosition = 0;
   private positionTop: number;
+  currentRoute: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.positionTop = this.navbar.nativeElement.offsetTop;
+    this.router.events.subscribe(event => {
+
+      if (event instanceof NavigationEnd ) {
+        this.currentRoute = event.url;
+      }
+    });
   }
 
   onScroll(data) {

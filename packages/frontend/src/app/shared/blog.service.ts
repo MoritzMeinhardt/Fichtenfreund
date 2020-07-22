@@ -10,7 +10,6 @@ import { Page } from '../bloglist/blog/page.model';
 @Injectable()
 export class BlogService {
 
-  onChangedDetail = new Subject();
   private urlBase = environment.urlBase;
 
   constructor(private http: HttpClient,

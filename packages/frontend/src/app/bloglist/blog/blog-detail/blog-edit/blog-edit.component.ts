@@ -42,7 +42,6 @@ export class BlogEditComponent implements OnInit {
             (blog: Blog) => {
               this.myBlog = blog;
               this.fillForm();
-              this.blogService.onChangedDetail.next(this.myBlog.titlePicture);
             }
           );
         }

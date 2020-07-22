@@ -1,7 +1,6 @@
 
 
 .navbar {
-  margin-top: -35vH;
   top: 0;
   position: sticky;
   z-index: 1;
@@ -11,6 +10,10 @@
   visibility: visible;
   transition: opacity .4s, visibility 0s;
   padding: 0;
+}
+
+.home-page {
+  margin-top: -35vH;
 }
 
 .navbar-nav {
@@ -59,8 +62,8 @@
   transition: opacity .4s, visibility 1s;
 }
 
-.active {
-  background-color: #c0c0c0;
+.active, a:hover{
+  font-weight: bold;
 }
 
 .bg-color {

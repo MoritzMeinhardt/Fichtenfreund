@@ -1,5 +1,4 @@
-
-<div style="min-height: 100vH;">
+<div [ngClass]="{'home-page': currentRoute == '/home'}">
   <app-header></app-header>
   <app-alerts></app-alerts>
 </div>
