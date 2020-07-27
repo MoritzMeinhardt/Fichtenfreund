@@ -27,6 +27,7 @@ import { AlertsComponent } from './alerts/alerts.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { AboutusViewComponent } from './aboutus-view/aboutus-view.component';
+import { QuillModule } from 'ngx-quill';
 
 export function tokenGetter() {
   return localStorage.getItem('id_token');
@@ -59,6 +60,7 @@ export function tokenGetter() {
     AppRoutingModule,
     ReactiveFormsModule,
     NgbModule,
+    QuillModule.forRoot(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
